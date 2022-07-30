@@ -2,7 +2,7 @@
   "name": "{{name}}",
   "version": "{{version}}",
   "description": "{{description}}",
-  "main": "./src/main.ts",
+  "main": "./index.html",
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3333 --open",
