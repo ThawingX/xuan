@@ -4,6 +4,14 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  --bg-blue:#8bc8fe;
+  --bg-blue-shallow:#c6e4ff;
+  --bg-white:#f3f4f6;
+  --font-blue:#90a2d4;
+  --noActive-font-gray:#c5c9cb;
+  --active-font-gray:#717577;
+  --bg-gray:#e0e8eb;
+  --font-blue-deep:#2d70aa;
 }
 
 html.dark {
