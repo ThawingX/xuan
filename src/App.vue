@@ -64,21 +64,16 @@
 
       </el-form>
       <div class="submitContainer" justify-center flex flex-col>        
-      <el-upload mt-2 self-center ref="upload" class='upload' action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-        :limit="1" :on-exceed="handleExceed" :auto-upload="false">
+      <el-button inline-block right-0 color-black type="success" @click="onSubmit()">submit</el-button>
+        <el-upload :data="{...form}" mt-2 self-center ref="upload" class='upload' action="http://119.3.243.150:3300/uploadFile"
+        :limit="1" :on-exceed="handleExceed" :auto-upload="false" >
         <template #trigger>
           <el-button color-black type="primary">选择源标准</el-button>
         </template>
         <el-button color-black class="ml-3" type="success" @click="submitUpload">
-          上传
+          上传标准文件
         </el-button>
-        <template #tip>
-          <div class="el-upload__tip text-red">
-            最少选择一个标准文件
-          </div>
-        </template>
       </el-upload>
-      <el-button inline-block right-0 color-black type="success" @click="onSubmit()">submit</el-button>
     </div>
     </div>
     
@@ -87,6 +82,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
+import axios from 'axios'
 import { genFileId } from 'element-plus'
 import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
 
@@ -116,11 +112,25 @@ const form = reactive({
   centialDepartment: '',
   pubDeparment: '',
   comment: '',
-  type: ''
+  type: '',
+  url:''
 })
+const config = {
+  method: 'post',
+  url: 'http://119.3.243.150:3300/upload',
+  headers: { },
+  data : form
+};
 
 const onSubmit = () => {
-  console.log(form)
+axios(config)
+.then(function (response:any) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error:any) {
+  console.log(error);
+});
+
 }
 </script>
 <style scoped>
