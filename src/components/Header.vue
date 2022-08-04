@@ -22,13 +22,13 @@
 }
 
 .chTitle {
-  color: var(--font-blue-deep);
+  color: var(--font-blue);
   font-weight: 700;
 }
 
 
 .enTitle {
-  color: var(--font-blue);
+  color: var(--font-blue-shallow);
   font-weight: 500;
 }
 

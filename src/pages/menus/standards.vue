@@ -1,7 +1,7 @@
 <template>
-  <div class="container" flex justify-center items-center>
-    <aside>
-      <div v-for="row of lists">{{ row.sName }}</div>
+  <div class="container" flex justify-center items-start>
+    <aside flex justify-center items-center flex-col>
+      <router-link :to="row.route" v-for="row of lists">{{ row.mName }}</router-link>
     </aside>
     <main>
       <router-view></router-view>
@@ -9,27 +9,35 @@
   </div>
 </template>
 <script lang="ts" setup>
-const lists = [
+import type { Menu } from './types/index';
+const lists: Menu[] = [
   {
-    sName: '所有标准',
+    mName: '所有标准',
+    route: { path: '/menus/standards/allStandard' }
   },
   {
-    sName: '国家标准',
+    mName: '国家标准',
+    route: { path: '/menus/standards/nationalStandard' }
   },
   {
-    sName: '行业标准',
+    mName: '行业标准',
+    route: { path: '/menus/standards/industryStandard' }
   },
   {
-    sName: '地方标准',
+    mName: '地方标准',
+    route: { path: '/menus/standards/localStandard' }
   },
   {
-    sName: '团体标准',
+    mName: '团体标准',
+    route: { path: '/menus/standards/groupStandard' }
   },
   {
-    sName: '国际标准',
+    mName: '国际标准',
+    route: { path: '/menus/standards/internationalStandard' }
   },
   {
-    sName: '企业标准',
+    mName: '企业标准',
+    route: { path: '/menus/standards/enterpriseStandard' }
   }
 
 ]

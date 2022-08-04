@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { RouteLocationRaw } from 'vue-router';
-interface Menu {
-  mName: String,
-  route: RouteLocationRaw
-}
+import type { Menu } from './menus/types/index';
 
 const Menus: Menu[] = [
   {

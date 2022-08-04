@@ -68,7 +68,7 @@ import { reactive, ref } from 'vue'
 import axios from 'axios'
 import { genFileId } from 'element-plus'
 import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
-
+import type { Form } from './standards/types/form'
 const upload = ref<UploadInstance>()
 
 const handleExceed: UploadProps['onExceed'] = (files) => {
@@ -82,7 +82,7 @@ const submitUpload = () => {
   upload.value!.submit()
 }
 // do not use same name with ref
-const form = reactive({
+const form: Form = reactive({
   key: '',
   chName: '',
   enName: '',
