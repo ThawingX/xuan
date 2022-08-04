@@ -10,11 +10,17 @@ body,
   --font-blue:#90a2d4;
   --noActive-font-gray:#c5c9cb;
   --active-font-gray:#717577;
+  --border-gray:#757575;
   --bg-gray:#e0e8eb;
   --font-blue-deep:#2d70aa;
+  --bg-show-header-gray:#e2e7eb;
 }
 
 html.dark {
   background: #121212;
+}
+
+html::-webkit-scrollbar{
+  display: none;
 }
 

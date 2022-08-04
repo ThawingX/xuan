@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import { toggleDark } from '~/composables'
 </script>
 
 <template>
-  <nav text-xl mt-6 inline-flex gap-2>
-    <button icon-btn @click="toggleDark()">
-      <div dark:i-carbon-moon i-carbon-sun />
-    </button>
-
-    <a
-      icon-btn i-carbon-logo-github
-      rel="noreferrer"
-      href="https://github.com/ThawingX/template"
-      target="_blank"
-      title="GitHub"
-    />
-  </nav>
+  <!-- <footer h5 bg-gray > -->
+  <!-- </footer> -->
 </template>
+<style>
+/* footer{ */
+  /* position:fixed; */
+  /* border-top: 1px solod var(--border-gray); */
+/* } */
+</style>
