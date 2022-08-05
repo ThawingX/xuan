@@ -11,6 +11,9 @@
         <el-form-item label="英文标准名称">
           <el-input v-model="form.enName" />
         </el-form-item>
+        <el-form-item label="标准状态">
+          <el-input v-model="form.state" />
+        </el-form-item>
         <el-form-item label="中文标准分类号">
           <el-input v-model="form.CCS" />
         </el-form-item>

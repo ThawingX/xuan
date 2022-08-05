@@ -1,45 +1,24 @@
 <script setup lang='ts'>
 import type { Form } from './types/form';
 import { useRouter } from 'vue-router';
+import { onMounted, reactive } from 'vue'
+import axios from 'axios'
 const router = useRouter()
-const standardsList: Form[] = [
-  {
-    key: '标准号1',
-    chName: '中文标准名字',
-    enName: '英文标准名字',
-    state: '标准状态',
-    CCS: '中国标准分类号',
-    ICS: '国际标准分类号',
-    pubDate: '发布日期',
-    doDate: '实施日期',
-    mainDepartment: '主管部门',
-    centialDepartment: '归口单位',
-    pubDeparment: '发布单位',
-    comment: '备注',
-    type: '标准类型',
-    url: '标准在服务器位置url'
-  },
-  {
-    key: '标准号2',
-    chName: '中文标准名字',
-    enName: '英文标准名字',
-    state: '标准状态',
-    CCS: '中国标准分类号',
-    ICS: '国际标准分类号',
-    pubDate: '发布日期',
-    doDate: '实施日期',
-    mainDepartment: '主管部门',
-    centialDepartment: '归口单位',
-    pubDeparment: '发布单位',
-    comment: '备注',
-    type: '标准类型',
-    url: '标准在服务器位置url'
-  }
-]
-
-function turnToDetail(row:any) {
-  router.push({ name: 'detail', params:{...row}})
+const config = {
+  method: 'post',
+  url: 'http://119.3.243.150:3300/getList',
+  headers: {},
 }
+let standardsList: Form[] = reactive([])
+
+function turnToDetail(row: any) {
+  router.push({ name: 'detail', params: { ...row } })
+}
+
+onMounted(async () => {
+  const res = await axios(config)
+  standardsList.push(...res.data.data)
+})
 </script>
 <template>
   <div class="standardsList">
