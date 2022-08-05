@@ -10,7 +10,7 @@
       </div>
       <div m-4 inline-flex justify-center text-center items-center flex-wrap flex-col class='title'>
         <div class="chTitle" text-xl>中医药装备标准与检验检测重点实验室</div>
-        <div class="enTitle">Key Lab of Traditional Chinese Medicine Devices for Standards and Inspection</div>
+        <div class="enTitle">Key Laboratory of Traditional Chinese Medicine Devices for Standards and Inspection</div>
       </div>
       <div class="spacer" flex-1></div>
     </nav>
