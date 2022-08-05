@@ -1,15 +1,15 @@
 <script setup lang='ts'>
-import type { Form } from './types/form';
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import { onMounted, reactive } from 'vue'
 import axios from 'axios'
+import type { Form } from './types/form'
 const router = useRouter()
 const config = {
   method: 'post',
   url: 'http://119.3.243.150:3300/getList',
   headers: {},
 }
-let standardsList: Form[] = reactive([])
+const standardsList: Form[] = reactive([])
 
 function turnToDetail(row: any) {
   router.push({ name: 'detail', params: { ...row } })
@@ -20,42 +20,50 @@ onMounted(async () => {
   standardsList.push(...res.data.data)
 })
 </script>
+
 <template>
   <div class="standardsList">
-    <div class="standardItem" m2 p2 v-for="row of standardsList" flex flex-col>
+    <div v-for="row of standardsList" class="standardItem" m2 p2 flex flex-col>
       <div class="header" flex justify-start items-baseline gap-2>
         <span class="sKey" cursor-pointer @click="turnToDetail(row)">{{ row.key }}</span>
         <span class="chName" text-sm>{{ row.chName }}</span>
       </div>
       <div class="CS" mt2 text-xs flex justify-start items-center gap-4>
         <span class="ICS" flex items-center>
-          <div inline-block i-carbon-earth></div>{{ row.ICS }}
+          <div inline-block i-carbon-earth />{{ row.ICS }}
         </span>
         <span class="CCS" flex items-center>
-          <div inline-block i-carbon-hybrid-networking></div>{{ row.ICS }}
+          <div inline-block i-carbon-hybrid-networking />{{ row.ICS }}
           {{ row.CCS }}
         </span>
       </div>
       <div class="department" mt-2 text-sm flex items-center>
-        <div inline-block i-carbon-application-mobile></div>
+        <div inline-block i-carbon-application-mobile />
         归口单位&nbsp
-        <div inline-block text-1 color-gray>{{ row.centialDepartment }}</div>
+        <div inline-block text-1 color-gray>
+          {{ row.centialDepartment }}
+        </div>
       </div>
-      <div class='timeGroup' flex items-center justify-end gap-4 text-xs>
+      <div class="timeGroup" flex items-center justify-end gap-4 text-xs>
         <div flex items-center>
-          <div inline-block i-carbon-upload></div>
+          <div inline-block i-carbon-upload />
           发布于&nbsp
-          <div inline-block text-1 color-gray>{{ row.pubDate }}</div>
+          <div inline-block text-1 color-gray>
+            {{ row.pubDate }}
+          </div>
         </div>
         <div flex items-center>
-          <div inline-block i-carbon-upload></div>
+          <div inline-block i-carbon-upload />
           实施于&nbsp
-          <div inline-block text-1 color-gray>{{ row.doDate }}</div>
+          <div inline-block text-1 color-gray>
+            {{ row.doDate }}
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 .sKey {
   color: var(--font-blue)

@@ -1,3 +1,56 @@
+<script lang="ts" setup>
+import { reactive, ref } from 'vue'
+import axios from 'axios'
+import { genFileId } from 'element-plus'
+import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
+import type { Form } from './standards/types/form'
+const upload = ref<UploadInstance>()
+
+const handleExceed: UploadProps['onExceed'] = (files) => {
+  upload.value!.clearFiles()
+  const file = files[0] as UploadRawFile
+  file.uid = genFileId()
+  upload.value!.handleStart(file)
+}
+
+const submitUpload = () => {
+  upload.value!.submit()
+}
+// do not use same name with ref
+const form: Form = reactive({
+  key: '',
+  chName: '',
+  enName: '',
+  state: '',
+  CCS: '',
+  ICS: '',
+  pubDate: '',
+  doDate: '',
+  mainDepartment: '',
+  centialDepartment: '',
+  pubDeparment: '',
+  comment: '',
+  type: '',
+  url: '',
+})
+const config = {
+  method: 'post',
+  url: 'http://119.3.243.150:3300/upload',
+  headers: {},
+  data: form,
+}
+
+const onSubmit = () => {
+  axios(config)
+    .then((response: any) => {
+      console.log(JSON.stringify(response.data))
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+}
+</script>
+
 <template>
   <main flex justify-center items-center pt5>
     <div class="container">
@@ -48,14 +101,19 @@
             <el-option label="企业标准" value="EnterpriseStandard" />
           </el-select>
         </el-form-item>
-
       </el-form>
       <div class="submitContainer" justify-center flex flex-col>
-        <el-button inline-block right-0 color-black type="success" @click="onSubmit()">submit</el-button>
-        <el-upload :data="{ ...form }" mt-2 self-center ref="upload" class='upload'
-          action="http://119.3.243.150:3300/uploadFile" :limit="1" :on-exceed="handleExceed" :auto-upload="false">
+        <el-button inline-block right-0 color-black type="success" @click="onSubmit()">
+          submit
+        </el-button>
+        <el-upload
+          ref="upload" :data="{ ...form }" mt-2 self-center class="upload"
+          action="http://119.3.243.150:3300/uploadFile" :limit="1" :on-exceed="handleExceed" :auto-upload="false"
+        >
           <template #trigger>
-            <el-button color-black type="primary">选择源标准</el-button>
+            <el-button color-black type="primary">
+              选择源标准
+            </el-button>
           </template>
           <el-button color-black class="ml-3" type="success" @click="submitUpload">
             上传标准文件
@@ -66,58 +124,5 @@
   </main>
 </template>
 
-<script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import axios from 'axios'
-import { genFileId } from 'element-plus'
-import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
-import type { Form } from './standards/types/form'
-const upload = ref<UploadInstance>()
-
-const handleExceed: UploadProps['onExceed'] = (files) => {
-  upload.value!.clearFiles()
-  const file = files[0] as UploadRawFile
-  file.uid = genFileId()
-  upload.value!.handleStart(file)
-}
-
-const submitUpload = () => {
-  upload.value!.submit()
-}
-// do not use same name with ref
-const form: Form = reactive({
-  key: '',
-  chName: '',
-  enName: '',
-  state: '',
-  CCS: '',
-  ICS: '',
-  pubDate: '',
-  doDate: '',
-  mainDepartment: '',
-  centialDepartment: '',
-  pubDeparment: '',
-  comment: '',
-  type: '',
-  url: ''
-})
-const config = {
-  method: 'post',
-  url: 'http://119.3.243.150:3300/upload',
-  headers: {},
-  data: form
-};
-
-const onSubmit = () => {
-  axios(config)
-    .then(function (response: any) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error: any) {
-      console.log(error);
-    });
-
-}
-</script>
 <style scoped>
 </style>
