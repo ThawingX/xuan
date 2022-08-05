@@ -8,7 +8,7 @@ const selfNotification = () => {
     message: h('i', { style: 'color: teal' }, '自动跳转到标准页，根页面保留使用'),
   })
 }
-export default function (router:Object = {}) {
+export default function (options:Object = {}) {
   selfNotification()
   router.push('/menus')
   return function (url:string = '/menus') {

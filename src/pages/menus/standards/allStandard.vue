@@ -1,10 +1,10 @@
 <script setup lang='ts'>
 import type { Form } from './types/form';
-
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const standardsList: Form[] = [
   {
-    key: '标准号',
+    key: '标准号1',
     chName: '中文标准名字',
     enName: '英文标准名字',
     state: '标准状态',
@@ -20,7 +20,7 @@ const standardsList: Form[] = [
     url: '标准在服务器位置url'
   },
   {
-    key: '标准号',
+    key: '标准号2',
     chName: '中文标准名字',
     enName: '英文标准名字',
     state: '标准状态',
@@ -36,12 +36,16 @@ const standardsList: Form[] = [
     url: '标准在服务器位置url'
   }
 ]
+
+function turnToDetail(row:any) {
+  router.push({ name: 'detail', params:{...row}})
+}
 </script>
 <template>
   <div class="standardsList">
     <div class="standardItem" m2 p2 v-for="row of standardsList" flex flex-col>
       <div class="header" flex justify-start items-baseline gap-2>
-        <span class="sKey">{{ row.key }}</span>
+        <span class="sKey" cursor-pointer @click="turnToDetail(row)">{{ row.key }}</span>
         <span class="chName" text-sm>{{ row.chName }}</span>
       </div>
       <div class="CS" mt2 text-xs flex justify-start items-center gap-4>
@@ -74,9 +78,6 @@ const standardsList: Form[] = [
   </div>
 </template>
 <style scoped>
-.standardsList {
-}
-
 .sKey {
   color: var(--font-blue)
 }
