@@ -1,23 +1,16 @@
 <script setup lang='ts'>
-import { useRouter } from 'vue-router'
-import { onMounted, reactive } from 'vue'
-import axios from 'axios'
-import type { Form } from './types/form'
+import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 const router = useRouter()
-const config = {
-  method: 'post',
-  url: 'http://119.3.243.150:3300/getList',
-  headers: {},
-}
-const standardsList: Form[] = reactive([])
-
+const route = useRoute()
+const { list } = route.query
+const standardsList = JSON.parse(list)
 function turnToDetail(row: any) {
   router.push({ name: 'detail', params: { ...row } })
 }
 
 onMounted(async () => {
-  const res = await axios(config)
-  standardsList.push(...res.data.data)
+  console.log(standardsList)
 })
 </script>
 

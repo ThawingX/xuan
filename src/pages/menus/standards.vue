@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { listenerCount } from 'events'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 import axios from 'axios'
@@ -12,7 +13,12 @@ const config = {
 async function search(e: Event) {
   const val = e.target!.value
   const res = await axios({ ...config, data: { search: val } })
-  console.log(res.data.data)
+  const list = res.data.data
+  if (res.data.data.length === 0)
+    alert('搜索为空')
+
+  else
+    router.push({ path: '/menus/standards/searchResult', query: { list: JSON.stringify(list) } })
 }
 onMounted(() => {
   router.push('/menus/standards/allStandard')
