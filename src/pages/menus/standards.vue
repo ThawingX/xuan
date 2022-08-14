@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { listenerCount } from 'events'
-import { useRouter } from 'vue-router'
-import { onMounted } from 'vue'
 import axios from 'axios'
 import type { Menu } from './types/index'
-const router = useRouter()
+import { useMainStore } from '~/stores'
+const mainStore = useMainStore()
 const config = {
   method: 'post',
   url: 'http://119.3.243.150:3300/checkStandard',
@@ -16,56 +14,61 @@ async function search(e: Event) {
   const list = res.data.data
   if (res.data.data.length === 0)
     alert('搜索为空')
-
   else
-    router.push({ path: '/menus/standards/searchResult', query: { list: JSON.stringify(list) } })
+    mainStore.standardLists = list
 }
-onMounted(() => {
-  router.push('/menus/standards/allStandard')
-})
+
 const lists: Menu[] = [
   {
     mName: '所有标准',
-    route: { path: '/menus/standards/allStandard' },
+    requestKey: 'all',
   },
   {
     mName: '国家标准',
-    route: { path: '/menus/standards/nationalStandard' },
+    requestKey: 'country',
   },
   {
     mName: '行业标准',
-    route: { path: '/menus/standards/industryStandard' },
+    requestKey: 'industry',
   },
   {
     mName: '地方标准',
-    route: { path: '/menus/standards/localStandard' },
+    requestKey: 'location',
   },
   {
     mName: '团体标准',
-    route: { path: '/menus/standards/groupStandard' },
+    requestKey: 'group',
   },
   {
     mName: '国际标准',
-    route: { path: '/menus/standards/internationalStandard' },
+    requestKey: 'national',
   },
   {
     mName: '企业标准',
-    route: { path: '/menus/standards/enterpriseStandard' },
+    requestKey: 'bussiness',
   },
 
 ]
+const clickMenu = async (row: any) => {
+  const res = await axios({
+    method: 'post',
+    url: `http://119.3.243.150:3300/getList/${row.requestKey}`,
+    headers: {},
+  })
+  mainStore.standardLists = res.data.data
+}
 </script>
 
 <template>
   <div class="container" flex justify-center items-start>
     <aside flex justify-center items-center flex-col m2>
-      <router-link v-for="row of lists" class="item" active-class="item-active" :to="row.route">
+      <button v-for="row of lists" class="item" active-class="item-active" :to="row.route" @click="clickMenu(row)">
         {{ row.mName }}
-      </router-link>
+      </button>
       <input class="search" m2 type="text" placeholder="标准号或者中文名称" @keyup.enter="search($event)">
     </aside>
     <main>
-      <router-view m2 />
+      <StandsList />
     </main>
   </div>
 </template>

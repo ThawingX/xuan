@@ -1,10 +1,13 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import axios from 'axios'
+import { ref } from 'vue'
 import { genFileId } from 'element-plus'
+
 import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
-import type { Form } from './standards/types/form'
+
+import { $upload } from '~/composables/http'
+import { useStandardStore } from '~/stores/standard'
 const upload = ref<UploadInstance>()
+const standardStore = useStandardStore()
 
 const handleExceed: UploadProps['onExceed'] = (files) => {
   upload.value!.clearFiles()
@@ -16,37 +19,16 @@ const handleExceed: UploadProps['onExceed'] = (files) => {
 const submitUpload = () => {
   upload.value!.submit()
 }
-// do not use same name with ref
-const form: Form = reactive({
-  key: '',
-  chName: '',
-  enName: '',
-  state: '',
-  CCS: '',
-  ICS: '',
-  pubDate: '',
-  doDate: '',
-  mainDepartment: '',
-  centialDepartment: '',
-  pubDeparment: '',
-  comment: '',
-  type: '',
-  url: '',
-})
-const config = {
-  method: 'post',
-  url: 'http://119.3.243.150:3300/upload',
-  headers: {},
-  data: form,
-}
 
 const onSubmit = () => {
-  axios(config)
+  $upload(standardStore.StandardForm)
     .then((response: any) => {
       console.log(JSON.stringify(response.data))
+      alert('submit成功，请提交源标准文件')
     })
     .catch((error: any) => {
       console.log(error)
+      alert('submit失败，请重试')
     })
 }
 </script>
@@ -54,45 +36,45 @@ const onSubmit = () => {
 <template>
   <main flex justify-center items-center pt5>
     <div class="container">
-      <el-form size="large" :model="form" label-width="8rem">
+      <el-form size="large" :model="standardStore.StandardForm" label-width="8rem">
         <el-form-item label="标准号">
-          <el-input v-model="form.key" />
+          <el-input v-model="standardStore.StandardForm.key" />
         </el-form-item>
         <el-form-item label="中文标准名称">
-          <el-input v-model="form.chName" />
+          <el-input v-model="standardStore.StandardForm.chName" />
         </el-form-item>
         <el-form-item label="英文标准名称">
-          <el-input v-model="form.enName" />
+          <el-input v-model="standardStore.StandardForm.enName" />
         </el-form-item>
         <el-form-item label="标准状态">
-          <el-input v-model="form.state" />
+          <el-input v-model="standardStore.StandardForm.state" />
         </el-form-item>
         <el-form-item label="中文标准分类号">
-          <el-input v-model="form.CCS" />
+          <el-input v-model="standardStore.StandardForm.CCS" />
         </el-form-item>
         <el-form-item label="英文标准分类号">
-          <el-input v-model="form.ICS" />
+          <el-input v-model="standardStore.StandardForm.ICS" />
         </el-form-item>
         <el-form-item label="发布日期">
-          <el-input v-model="form.pubDate" />
+          <el-input v-model="standardStore.StandardForm.pubDate" />
         </el-form-item>
         <el-form-item label="实施日期">
-          <el-input v-model="form.doDate" />
+          <el-input v-model="standardStore.StandardForm.doDate" />
         </el-form-item>
         <el-form-item label="归口部门">
-          <el-input v-model="form.centialDepartment" />
+          <el-input v-model="standardStore.StandardForm.centialDepartment" />
         </el-form-item>
         <el-form-item label="主管部门">
-          <el-input v-model="form.mainDepartment" />
+          <el-input v-model="standardStore.StandardForm.mainDepartment" />
         </el-form-item>
         <el-form-item label="发布单位">
-          <el-input v-model="form.pubDeparment" />
+          <el-input v-model="standardStore.StandardForm.pubDeparment" />
         </el-form-item>
         <el-form-item label="备注">
-          <el-input v-model="form.comment" />
+          <el-input v-model="standardStore.StandardForm.comment" />
         </el-form-item>
         <el-form-item label="标准类型">
-          <el-select v-model="form.type" placeholder="请选择标准的类型">
+          <el-select v-model="standardStore.StandardForm.type" placeholder="请选择标准的类型">
             <el-option label="国家标准" value="NationalStandard" />
             <el-option label="行业标准" value="IndustryStandard" />
             <el-option label="地方标准" value="LocalStandard" />
@@ -107,7 +89,7 @@ const onSubmit = () => {
           submit
         </el-button>
         <el-upload
-          ref="upload" :data="{ ...form }" mt-2 self-center class="upload"
+          ref="upload" :data="{ ...standardStore.StandardForm }" mt-2 self-center class="upload"
           action="http://119.3.243.150:3300/uploadFile" :limit="1" :on-exceed="handleExceed" :auto-upload="false"
         >
           <template #trigger>
@@ -124,5 +106,3 @@ const onSubmit = () => {
   </main>
 </template>
 
-<style scoped>
-</style>

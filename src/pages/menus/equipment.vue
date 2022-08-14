@@ -1,3 +1,3 @@
 <template>
-仪器设备 has works!
+  仪器设备 has works!
 </template>

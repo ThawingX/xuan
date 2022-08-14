@@ -1,19 +1,16 @@
 <script setup lang='ts'>
 import { useRouter } from 'vue-router'
-import { onMounted, reactive } from 'vue'
-const props = defineProps(['list'])
-const { list: standardsList } = props
+import { useMainStore } from '~/stores'
 const router = useRouter()
+const mainStore = useMainStore()
 function turnToDetail(row: any) {
   router.push({ name: 'detail', params: { ...row } })
 }
-onMounted(() => {
-})
 </script>
 
 <template>
   <div class="standardsList">
-    <div v-for="row of standardsList" class="standardItem" m2 p2 flex flex-col>
+    <div v-for="row of mainStore.standardLists" class="standardItem" m2 p2 flex flex-col>
       <div class="header" flex justify-start items-baseline gap-2>
         <span class="sKey" cursor-pointer @click="turnToDetail(row)">{{ row.key }}</span>
         <span class="chName" text-sm>{{ row.chName }}</span>

@@ -1,12 +1,6 @@
-<template>
-this is page what has not finished yet.
-<br>
-<router-link border to="/menus">Here is main page</router-link>
-</template>
 <script lang="ts" setup>
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { h } from 'vue'
+import { h, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 const router = useRouter()
 const selfNotification = () => {
@@ -20,3 +14,11 @@ onMounted(() => {
   router.push('/menus/standards')
 })
 </script>
+
+<template>
+  <span>this is page what has not finished yet.</span>
+  <br>
+  <router-link border to="/menus">
+    Here is main page
+  </router-link>
+</template>

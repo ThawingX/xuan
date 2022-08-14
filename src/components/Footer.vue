@@ -2,9 +2,13 @@
 </script>
 
 <template>
-  <!-- <footer h5 bg-gray > -->
-  <!-- </footer> -->
+  <footer>
+    <div>@copyright</div>
+    <div />
+    <div />
+  </footer>
 </template>
+
 <style>
 /* footer{ */
   /* position:fixed; */

@@ -1,29 +1,12 @@
 <script setup lang="ts">
-import type { Menu } from './menus/types/index'
-
-const Menus: Menu[] = [
-  {
-    mName: '标准',
-    route: { path: '/menus/standards' },
-  },
-  {
-    mName: '产品检测',
-    route: { path: '/menus/productCheck' },
-  },
-  {
-    mName: '仪器设备',
-    route: { path: '/menus/equipment' },
-  },
-  {
-    mName: '标准录入',
-    route: { path: '/menus/inputData' },
-  },
-]
+import { useMainStore } from '~/stores'
+const mainStore = useMainStore()
 </script>
 
 <template>
   <header flex justify-center gap16>
-    <router-link v-for="row of Menus" :to="row.route">
+    <!-- key需要注意修改 -->
+    <router-link v-for="row of mainStore.topMenuList" :key="row.mName" :to="row.route">
       {{ row.mName }}
     </router-link>
   </header>
