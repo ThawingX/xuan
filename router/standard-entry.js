@@ -41,8 +41,39 @@ router.post('/uploadFile', (req, res) => {
   res.send('uploadFile')
 })
 
-router.post('/getList', async (req, res) => {
+router.post('/getList/all', async (req, res) => {
   const data = await Standard.find({})
+  // console.log(data)
+  res.json({ data })
+})
+
+router.post('/getList/country', async (req, res) => {
+  const data = await Standard.find({'type':'NationalStandard'})
+  // console.log(data)
+  res.json({ data })
+})
+router.post('/getList/industry', async (req, res) => {
+  const data = await Standard.find({'type':'IndustryStandard'})
+  // console.log(data)
+  res.json({ data })
+})
+router.post('/getList/location', async (req, res) => {
+  const data = await Standard.find({'type':'LocalStandard'})
+  // console.log(data)
+  res.json({ data })
+})
+router.post('/getList/group', async (req, res) => {
+  const data = await Standard.find({'type':'groupStandard'})
+  // console.log(data)
+  res.json({ data })
+})
+router.post('/getList/national', async (req, res) => {
+  const data = await Standard.find({'type':'InternationalStandard'})
+  // console.log(data)
+  res.json({ data })
+})
+router.post('/getList/bussiness', async (req, res) => {
+  const data = await Standard.find({'type':'EnterpriseStandard'})
   // console.log(data)
   res.json({ data })
 })
@@ -52,13 +83,14 @@ router.post('/checkStandard', async (req, res) => {
   const { search } = body
   const data = await Standard.find({
     $or: [
-      { key: search },
-      { chName: search }
+      { key: { $regex: search } },
+      { chName: { $regex: search } }
     ]
   })
   console.log(data)
   res.json({ data })
 })
+
 
 router.get('/test', (req, res) => {
   res.send('test')
