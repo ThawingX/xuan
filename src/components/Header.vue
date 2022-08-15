@@ -11,17 +11,19 @@ function backHome() {
     <topConnection />
     <nav flex justify-start items-center>
       <div flex-1 cursor-pointer @click="backHome">
-        <img h-20 inline-flex src="../styles/assets/logo.png" alt="新黄浦中医联创院">
+        <img ml3 h-20 inline-flex src="../styles/assets/logo.png" alt="新黄浦中医联创院">
       </div>
       <div m-4 inline-flex justify-center text-center items-center flex-wrap flex-col class="title">
         <div class="chTitle" text-xl>
           中医药装备标准与检验检测重点实验室
         </div>
-        <div class="enTitle">
+        <div class="enTitle" text-xs>
           Key Laboratory of Traditional Chinese Medicine Devices for Standards and Inspection
         </div>
       </div>
-      <div class="spacer" flex-1 />
+      <div flex-1 flex justify-end>
+        <search />
+      </div>
     </nav>
   </header>
 </template>
