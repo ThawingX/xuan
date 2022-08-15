@@ -48,13 +48,26 @@ const onSubmit = () => {
               <el-input v-model="standardStore.StandardForm.enName" />
             </el-form-item>
             <el-form-item label="标准状态">
-              <el-input v-model="standardStore.StandardForm.state" />
+              <el-select v-model="standardStore.StandardForm.state" placeholder="请选择标准的状态">
+                <el-option
+                  v-for="row of standardStore.stateLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
             </el-form-item>
             <el-form-item label="中文标准分类号">
               <el-input v-model="standardStore.StandardForm.CCS" />
             </el-form-item>
             <el-form-item label="英文标准分类号">
               <el-input v-model="standardStore.StandardForm.ICS" />
+            </el-form-item>
+            <el-form-item label="标准性质">
+              <el-select v-model="standardStore.StandardForm.property" placeholder="请选择标准的性质">
+                <el-option
+                  v-for="row of standardStore.propertyLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
             </el-form-item>
           </div>
           <div class="right">
@@ -76,18 +89,16 @@ const onSubmit = () => {
             <el-form-item label="备注">
               <el-input v-model="standardStore.StandardForm.comment" />
             </el-form-item>
+            <el-form-item label="标准类型">
+              <el-select v-model="standardStore.StandardForm.type" placeholder="请选择标准的类型">
+                <el-option
+                  v-for="row of standardStore.typeLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
+            </el-form-item>
           </div>
         </div>
-        <el-form-item label="标准类型">
-          <el-select v-model="standardStore.StandardForm.type" class="standardType" placeholder="请选择标准的类型">
-            <el-option label="国家标准" value="NationalStandard" />
-            <el-option label="行业标准" value="IndustryStandard" />
-            <el-option label="地方标准" value="LocalStandard" />
-            <el-option label="团体标准" value="groupStandard" />
-            <el-option label="国际标准" value="InternationalStandard" />
-            <el-option label="企业标准" value="EnterpriseStandard" />
-          </el-select>
-        </el-form-item>
       </el-form>
       <div class="submitContainer" justify-center flex flex-col>
         <el-button inline-block right-0 color-black type="success" @click="onSubmit()">
@@ -112,7 +123,4 @@ const onSubmit = () => {
 </template>
 
 <style scoped>
-.standardType{
-  width:100%;
-}
 </style>

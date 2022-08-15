@@ -18,6 +18,7 @@ export const useStandardStore = defineStore('standard', {
         comment: '',
         type: '',
         url: '',
+        property: '',
       },
       typeLists: [
         {
@@ -47,6 +48,38 @@ export const useStandardStore = defineStore('standard', {
         {
           mName: '企业标准',
           requestKey: 'bussiness',
+        },
+      ],
+      propertyLists: [
+        {
+          mName: '推荐性',
+          requestKey: 'recommended',
+        },
+        {
+          mName: '指导性技术文件',
+          requestKey: 'guid',
+        },
+        {
+          mName: '强制性',
+          requestKey: 'mandatory',
+        },
+      ],
+      stateLists: [
+        {
+          mName: '即将实施',
+          requestKey: 'soon',
+        },
+        {
+          mName: '现行',
+          requestKey: 'in',
+        },
+        {
+          mName: '被代替',
+          requestKey: 'replaced',
+        },
+        {
+          mName: '废止',
+          requestKey: 'obsolete',
         },
       ],
     }

@@ -48,6 +48,7 @@ aside {
 
 .item:focus {
   background-color: var(--bg-blue-shallow);
-  color:var(--font-blue)
+  color:var(--font-blue);
+  font-weight:bold;
 }
 </style>
