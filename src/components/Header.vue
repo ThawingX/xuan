@@ -8,12 +8,7 @@ function backHome() {
 
 <template>
   <header>
-    <div class="connection" h-5 flex items-center justify-end>
-      <div inline-flex i-carbon-phone-voice-filled />
-      <div inline-flex>
-        联系方式
-      </div>
-    </div>
+    <topConnection />
     <nav flex justify-start items-center>
       <div flex-1 cursor-pointer @click="backHome">
         <img h-20 inline-flex src="../styles/assets/logo.png" alt="新黄浦中医联创院">

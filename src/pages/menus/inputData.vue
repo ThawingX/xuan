@@ -15,7 +15,6 @@ const handleExceed: UploadProps['onExceed'] = (files) => {
   file.uid = genFileId()
   upload.value!.handleStart(file)
 }
-
 const submitUpload = () => {
   upload.value!.submit()
 }
@@ -37,44 +36,50 @@ const onSubmit = () => {
   <main flex justify-center items-center pt5>
     <div class="container">
       <el-form size="large" :model="standardStore.StandardForm" label-width="8rem">
-        <el-form-item label="标准号">
-          <el-input v-model="standardStore.StandardForm.key" />
-        </el-form-item>
-        <el-form-item label="中文标准名称">
-          <el-input v-model="standardStore.StandardForm.chName" />
-        </el-form-item>
-        <el-form-item label="英文标准名称">
-          <el-input v-model="standardStore.StandardForm.enName" />
-        </el-form-item>
-        <el-form-item label="标准状态">
-          <el-input v-model="standardStore.StandardForm.state" />
-        </el-form-item>
-        <el-form-item label="中文标准分类号">
-          <el-input v-model="standardStore.StandardForm.CCS" />
-        </el-form-item>
-        <el-form-item label="英文标准分类号">
-          <el-input v-model="standardStore.StandardForm.ICS" />
-        </el-form-item>
-        <el-form-item label="发布日期">
-          <el-input v-model="standardStore.StandardForm.pubDate" />
-        </el-form-item>
-        <el-form-item label="实施日期">
-          <el-input v-model="standardStore.StandardForm.doDate" />
-        </el-form-item>
-        <el-form-item label="归口部门">
-          <el-input v-model="standardStore.StandardForm.centialDepartment" />
-        </el-form-item>
-        <el-form-item label="主管部门">
-          <el-input v-model="standardStore.StandardForm.mainDepartment" />
-        </el-form-item>
-        <el-form-item label="发布单位">
-          <el-input v-model="standardStore.StandardForm.pubDeparment" />
-        </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="standardStore.StandardForm.comment" />
-        </el-form-item>
+        <div class="inlineContainer" flex justify-center items-center>
+          <div class="left">
+            <el-form-item label="标准号">
+              <el-input v-model="standardStore.StandardForm.key" />
+            </el-form-item>
+            <el-form-item label="中文标准名称">
+              <el-input v-model="standardStore.StandardForm.chName" />
+            </el-form-item>
+            <el-form-item label="英文标准名称">
+              <el-input v-model="standardStore.StandardForm.enName" />
+            </el-form-item>
+            <el-form-item label="标准状态">
+              <el-input v-model="standardStore.StandardForm.state" />
+            </el-form-item>
+            <el-form-item label="中文标准分类号">
+              <el-input v-model="standardStore.StandardForm.CCS" />
+            </el-form-item>
+            <el-form-item label="英文标准分类号">
+              <el-input v-model="standardStore.StandardForm.ICS" />
+            </el-form-item>
+          </div>
+          <div class="right">
+            <el-form-item label="发布日期">
+              <el-input v-model="standardStore.StandardForm.pubDate" />
+            </el-form-item>
+            <el-form-item label="实施日期">
+              <el-input v-model="standardStore.StandardForm.doDate" />
+            </el-form-item>
+            <el-form-item label="归口部门">
+              <el-input v-model="standardStore.StandardForm.centialDepartment" />
+            </el-form-item>
+            <el-form-item label="主管部门">
+              <el-input v-model="standardStore.StandardForm.mainDepartment" />
+            </el-form-item>
+            <el-form-item label="发布单位">
+              <el-input v-model="standardStore.StandardForm.pubDeparment" />
+            </el-form-item>
+            <el-form-item label="备注">
+              <el-input v-model="standardStore.StandardForm.comment" />
+            </el-form-item>
+          </div>
+        </div>
         <el-form-item label="标准类型">
-          <el-select v-model="standardStore.StandardForm.type" placeholder="请选择标准的类型">
+          <el-select v-model="standardStore.StandardForm.type" class="standardType" placeholder="请选择标准的类型">
             <el-option label="国家标准" value="NationalStandard" />
             <el-option label="行业标准" value="IndustryStandard" />
             <el-option label="地方标准" value="LocalStandard" />
@@ -106,3 +111,8 @@ const onSubmit = () => {
   </main>
 </template>
 
+<style scoped>
+.standardType{
+  width:100%;
+}
+</style>

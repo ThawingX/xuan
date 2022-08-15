@@ -65,7 +65,7 @@ const clickMenu = async (row: any) => {
       <button v-for="row of lists" class="item" active-class="item-active" :to="row.route" @click="clickMenu(row)">
         {{ row.mName }}
       </button>
-      <input class="search" m2 type="text" placeholder="标准号或者中文名称" @keyup.enter="search($event)">
+      <!-- <input class="search" m2 type="text" placeholder="标准号或者中文名称" @keyup.enter="search($event)"> -->
     </aside>
     <main>
       <StandsList />
@@ -82,13 +82,6 @@ const clickMenu = async (row: any) => {
 aside {
   width: 20%;
   box-shadow: 0 0 10px var(--border-gray);
-}
-
-.search {
-  border-radius: 1rem;
-  background-color: var(--bg-blue-shallow);
-  text-align: center;
-  box-shadow: 0 0 5px 2px inset var(--bg-blue);
 }
 
 .item {

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-export const useStandardStore = defineStore('main', {
+export const useStandardStore = defineStore('standard', {
   state: () => {
     return {
       standardLists: [],

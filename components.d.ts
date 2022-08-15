@@ -13,6 +13,8 @@ declare module '@vue/runtime-core' {
     Main: typeof import('./src/components/Main.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./src/components/Header/search.vue')['default']
     StandsList: typeof import('./src/components/StandsList.vue')['default']
+    TopConnection: typeof import('./src/components/Header/topConnection.vue')['default']
   }
 }
