@@ -6,15 +6,21 @@ const mainStore = useMainStore()
 <template>
   <header flex justify-center gap16>
     <!-- key需要注意修改 -->
-    <router-link v-for="row of mainStore.topMenuList" :key="row.mName" :to="row.route">
+    <router-link v-for="row of mainStore.topMenuList" :key="row.mName" m1 active-class="active" class="menus" text-xs :to="row.route">
       {{ row.mName }}
     </router-link>
   </header>
   <router-view />
 </template>
 
-<style>
+<style scoped>
 header {
   background-color: var(--bg-show-header-gray);
+}
+.menus{
+  color:var(--font-gray)
+}
+.active{
+  color:black;
 }
 </style>

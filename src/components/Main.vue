@@ -1,10 +1,14 @@
 <template>
   <main>
-    <router-view></router-view>
+    <router-view />
   </main>
 </template>
-<style>
-main{
+
+<style scoped>
+main {
   background-color: var(--bg-blue-shallow);
+  height:100%;
+  width:100%;
+  overflow:hidden;
 }
 </style>

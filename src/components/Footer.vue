@@ -9,7 +9,7 @@
   </footer>
 </template>
 
-<style>
+<style scoped>
 /* footer{ */
   /* position:fixed; */
   /* border-top: 1px solod var(--border-gray); */
