@@ -16,6 +16,7 @@ const StandardSchema = mongoose.Schema({
   comment: String,
   type: String,
   url:String,
+  property:String
 })
 
 const Standard = model('Standard',StandardSchema )

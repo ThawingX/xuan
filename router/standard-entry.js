@@ -3,6 +3,7 @@ const router = require('express').Router()
 const mongoose = require('mongoose')
 const { Standard } = require('../schema/standard')
 const formidable = require("formidable")
+const { getListType } = require('../utils/getListType')
 mongoose.connect('mongodb://119.3.243.150:3333/standard')
 
 router.post('/upload', async (req, res) => {
@@ -41,54 +42,42 @@ router.post('/uploadFile', (req, res) => {
   res.send('uploadFile')
 })
 
-router.post('/getList/all', async (req, res) => {
-  const data = await Standard.find({})
-  // console.log(data)
+//  匹配所有获取标准列表请求
+router.post('/getList', async (req, res) => {
+  const requestKey = req.body.requestKey
+  let data
+  if (requestKey === 'all') {
+    data = await Standard.find({})
+  }
+  else {
+    const requestKeyType = getListType(requestKey)
+    const queryConfig = {}
+    // 动态key值
+    queryConfig[requestKeyType] = requestKey
+    console.log(queryConfig)
+    data = await Standard.find(queryConfig)
+  }
   res.json({ data })
 })
 
-router.post('/getList/country', async (req, res) => {
-  const data = await Standard.find({'type':'NationalStandard'})
-  // console.log(data)
-  res.json({ data })
-})
-router.post('/getList/industry', async (req, res) => {
-  const data = await Standard.find({'type':'IndustryStandard'})
-  // console.log(data)
-  res.json({ data })
-})
-router.post('/getList/location', async (req, res) => {
-  const data = await Standard.find({'type':'LocalStandard'})
-  // console.log(data)
-  res.json({ data })
-})
-router.post('/getList/group', async (req, res) => {
-  const data = await Standard.find({'type':'groupStandard'})
-  // console.log(data)
-  res.json({ data })
-})
-router.post('/getList/national', async (req, res) => {
-  const data = await Standard.find({'type':'InternationalStandard'})
-  // console.log(data)
-  res.json({ data })
-})
-router.post('/getList/bussiness', async (req, res) => {
-  const data = await Standard.find({'type':'EnterpriseStandard'})
-  // console.log(data)
-  res.json({ data })
-})
 
 router.post('/checkStandard', async (req, res) => {
   const body = req.body
-  const { search } = body
-  const data = await Standard.find({
-    $or: [
-      { key: { $regex: search } },
-      { chName: { $regex: search } }
-    ]
-  })
-  console.log(data)
-  res.json({ data })
+  const { searchKey: search } = body
+  let data
+  try {
+    data = await Standard.find({
+      $or: [
+        { key: { $regex: search } },
+        { chName: { $regex: search } }
+      ]
+    })
+    res.json({ data, message: '结束搜索' })
+  } catch (err) {
+    res.send(err)
+  } finally {
+    // 暂时先空
+  }
 })
 
 
