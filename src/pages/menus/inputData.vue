@@ -5,10 +5,11 @@ import { genFileId } from 'element-plus'
 import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
 
 import { $upload } from '~/composables/http'
+import { useStandardFormStore } from '~/stores/standard/standardForm'
 import { useStandardStore } from '~/stores/standard'
 const upload = ref<UploadInstance>()
+const standardFormStore = useStandardFormStore()
 const standardStore = useStandardStore()
-
 const handleExceed: UploadProps['onExceed'] = (files) => {
   upload.value!.clearFiles()
   const file = files[0] as UploadRawFile
@@ -20,35 +21,43 @@ const submitUpload = () => {
 }
 
 const onSubmit = () => {
-  $upload(standardStore.StandardForm)
-    .then((response: any) => {
-      console.log(JSON.stringify(response.data))
-      alert('submit成功，请提交源标准文件')
-    })
-    .catch((error: any) => {
-      console.log(error)
-      alert('submit失败，请重试')
-    })
+  try {
+    $upload(standardFormStore.StandardForm)
+      .then((response: any) => {
+        console.log(response)
+        alert('submit成功，请提交源标准文件')
+      })
+      .catch((error: any) => {
+        console.log(error)
+        alert('submit失败，请重试')
+      })
+  }
+  catch (err) {
+    console.log(err)
+  }
+  finally {
+    standardFormStore.$reset()
+  }
 }
 </script>
 
 <template>
   <main flex justify-center items-center pt5>
     <div class="container">
-      <el-form size="large" :model="standardStore.StandardForm" label-width="8rem">
+      <el-form size="large" :model="standardFormStore.StandardForm" label-width="8rem">
         <div class="inlineContainer" flex justify-center items-center>
           <div class="left">
             <el-form-item label="标准号">
-              <el-input v-model="standardStore.StandardForm.key" />
+              <el-input v-model="standardFormStore.StandardForm.key" />
             </el-form-item>
             <el-form-item label="中文标准名称">
-              <el-input v-model="standardStore.StandardForm.chName" />
+              <el-input v-model="standardFormStore.StandardForm.chName" />
             </el-form-item>
             <el-form-item label="英文标准名称">
-              <el-input v-model="standardStore.StandardForm.enName" />
+              <el-input v-model="standardFormStore.StandardForm.enName" />
             </el-form-item>
             <el-form-item label="标准状态">
-              <el-select v-model="standardStore.StandardForm.state" placeholder="请选择标准的状态">
+              <el-select v-model="standardFormStore.StandardForm.state" placeholder="请选择标准的状态">
                 <el-option
                   v-for="row of standardStore.stateLists" :key="row.mName" :label="row.mName"
                   :value="row.requestKey"
@@ -56,13 +65,13 @@ const onSubmit = () => {
               </el-select>
             </el-form-item>
             <el-form-item label="中文标准分类号">
-              <el-input v-model="standardStore.StandardForm.CCS" />
+              <el-input v-model="standardFormStore.StandardForm.CCS" />
             </el-form-item>
             <el-form-item label="英文标准分类号">
-              <el-input v-model="standardStore.StandardForm.ICS" />
+              <el-input v-model="standardFormStore.StandardForm.ICS" />
             </el-form-item>
             <el-form-item label="标准性质">
-              <el-select v-model="standardStore.StandardForm.property" placeholder="请选择标准的性质">
+              <el-select v-model="standardFormStore.StandardForm.property" placeholder="请选择标准的性质">
                 <el-option
                   v-for="row of standardStore.propertyLists" :key="row.mName" :label="row.mName"
                   :value="row.requestKey"
@@ -72,25 +81,25 @@ const onSubmit = () => {
           </div>
           <div class="right">
             <el-form-item label="发布日期">
-              <el-input v-model="standardStore.StandardForm.pubDate" />
+              <el-input v-model="standardFormStore.StandardForm.pubDate" />
             </el-form-item>
             <el-form-item label="实施日期">
-              <el-input v-model="standardStore.StandardForm.doDate" />
+              <el-input v-model="standardFormStore.StandardForm.doDate" />
             </el-form-item>
             <el-form-item label="归口部门">
-              <el-input v-model="standardStore.StandardForm.centialDepartment" />
+              <el-input v-model="standardFormStore.StandardForm.centialDepartment" />
             </el-form-item>
             <el-form-item label="主管部门">
-              <el-input v-model="standardStore.StandardForm.mainDepartment" />
+              <el-input v-model="standardFormStore.StandardForm.mainDepartment" />
             </el-form-item>
             <el-form-item label="发布单位">
-              <el-input v-model="standardStore.StandardForm.pubDeparment" />
+              <el-input v-model="standardFormStore.StandardForm.pubDeparment" />
             </el-form-item>
             <el-form-item label="备注">
-              <el-input v-model="standardStore.StandardForm.comment" />
+              <el-input v-model="standardFormStore.StandardForm.comment" />
             </el-form-item>
             <el-form-item label="标准类型">
-              <el-select v-model="standardStore.StandardForm.type" placeholder="请选择标准的类型">
+              <el-select v-model="standardFormStore.StandardForm.type" placeholder="请选择标准的类型">
                 <el-option
                   v-for="row of standardStore.typeLists" :key="row.mName" :label="row.mName"
                   :value="row.requestKey"
@@ -105,7 +114,7 @@ const onSubmit = () => {
           submit
         </el-button>
         <el-upload
-          ref="upload" :data="{ ...standardStore.StandardForm }" mt-2 self-center class="upload"
+          ref="upload" :data="{ ...standardFormStore.StandardForm }" mt-2 self-center class="upload"
           action="http://119.3.243.150:3300/uploadFile" :limit="1" :on-exceed="handleExceed" :auto-upload="false"
         >
           <template #trigger>

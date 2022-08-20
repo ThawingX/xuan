@@ -1,17 +1,13 @@
 <script setup lang='ts'>
-import axios from 'axios'
-import { useMainStore } from '~/stores'
 import { useStandardStore } from '~/stores/standard'
-const mainStore = useMainStore()
+
+import { $getStandard } from '~/composables/http'
+
 const standardStore = useStandardStore()
 
 const clickMenu = async (row: any) => {
-  const res = await axios({
-    method: 'post',
-    url: `http://119.3.243.150:3300/getList/${row.requestKey}`,
-    headers: {},
-  })
-  mainStore.standardLists = res.data.data
+  const res = await $getStandard(row.requestKey)
+  standardStore.standardLists = res.data.data
 }
 </script>
 
@@ -39,7 +35,7 @@ aside {
   text-align: center;
   font-size: 0.875rem;
   border-radius: 0.25rem;
-  color:var(--font-gray-deep)
+  color: var(--font-gray-deep)
 }
 
 .item:hover {
@@ -48,7 +44,7 @@ aside {
 
 .item:focus {
   background-color: var(--bg-blue-shallow);
-  color:var(--font-blue);
-  font-weight:bold;
+  color: var(--font-blue);
+  font-weight: bold;
 }
 </style>

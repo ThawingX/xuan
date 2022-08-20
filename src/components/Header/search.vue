@@ -1,16 +1,13 @@
 <script setup lang='ts'>
-import axios from 'axios'
 import { useMainStore } from '~/stores'
+import { $search } from '~/composables/http'
 const mainStore = useMainStore()
-const config = {
-  method: 'post',
-  url: 'http://119.3.243.150:3300/checkStandard',
-  headers: {},
-}
+
 async function search(e: Event) {
   const val = e.target!.value
-  const res = await axios({ ...config, data: { search: val } })
+  const res = await $search(val)
   const list = res.data.data
+  console.log(res)
   if (res.data.data.length === 0)
     alert('搜索为空')
   else

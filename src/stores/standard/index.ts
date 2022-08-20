@@ -1,25 +1,9 @@
 import { defineStore } from 'pinia'
+
 export const useStandardStore = defineStore('standard', {
   state: () => {
     return {
       standardLists: [],
-      StandardForm: {
-        key: '',
-        chName: '',
-        enName: '',
-        state: '',
-        CCS: '',
-        ICS: '',
-        pubDate: '',
-        doDate: '',
-        mainDepartment: '',
-        centialDepartment: '',
-        pubDeparment: '',
-        comment: '',
-        type: '',
-        url: '',
-        property: '',
-      },
       typeLists: [
         {
           mName: '所有标准',
@@ -82,9 +66,15 @@ export const useStandardStore = defineStore('standard', {
           requestKey: 'obsolete',
         },
       ],
+
     }
   },
-  actions: {
+  getters: {
 
+  },
+  actions: {
+    getDivideStandardLists(dividedNums = 10, currPage = 1, totalPage = 10): number[] {
+      return this.standardLists.slice(dividedNums * (currPage - 1), currPage * dividedNums)
+    },
   },
 })

@@ -22,7 +22,7 @@ function backHome() {
         </div>
       </div>
       <div flex-1 flex justify-end>
-        <search />
+        <!-- <search /> -->
       </div>
     </nav>
   </header>

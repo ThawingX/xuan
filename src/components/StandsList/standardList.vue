@@ -1,8 +1,10 @@
 <script setup lang='ts'>
 import { useRouter } from 'vue-router'
-import { useMainStore } from '~/stores'
+import { useStandardStore } from '~/stores/standard'
+import { usePaginationStore } from '~/stores/utils/Pagination'
+const paginationStore = usePaginationStore()
 const router = useRouter()
-const mainStore = useMainStore()
+const standardStore = useStandardStore()
 function turnToDetail(row: any) {
   router.push({ name: 'detail', params: { ...row } })
 }
@@ -10,7 +12,7 @@ function turnToDetail(row: any) {
 
 <template>
   <div class="standardsList">
-    <div v-for="row of mainStore.standardLists" class="standardItem" m2 p2 flex flex-col>
+    <div v-for="row of standardStore.getDivideStandardLists(paginationStore.pageSize, paginationStore.currPage, paginationStore.total)" :key="row.key" class="standardItem" m2 p2 flex flex-col>
       <div class="header" flex justify-start items-baseline gap-2>
         <span class="sKey" cursor-pointer @click="turnToDetail(row)">{{ row.key }}</span>
         <span class="chName" text-sm>{{ row.chName }}</span>

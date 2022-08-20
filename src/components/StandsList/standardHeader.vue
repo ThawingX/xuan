@@ -1,6 +1,12 @@
 <script setup lang='ts'>
 import { useStandardStore } from '~/stores/standard'
+import { $getStandard } from '~/composables/http'
 const standardStore = useStandardStore()
+const handleKey = async (row: any) => {
+  const res = await $getStandard(row.requestKey)
+  console.log(res)
+  standardStore.standardLists = res.data.data
+}
 </script>
 
 <template>
@@ -17,7 +23,7 @@ const standardStore = useStandardStore()
         <div class="label">
           标准类型
         </div>
-        <div v-for="row of standardStore.typeLists" class="option">
+        <div v-for="row of standardStore.typeLists" :key="row.mName" class="option" @click="handleKey(row)">
           {{ row.mName }}
         </div>
       </div>
@@ -25,7 +31,7 @@ const standardStore = useStandardStore()
         <div class="label">
           标准性质
         </div>
-        <div v-for="row of standardStore.propertyLists" class="option">
+        <div v-for="row of standardStore.propertyLists" :key="row.mName" class="option" @click="handleKey(row)">
           {{ row.mName }}
         </div>
       </div>
@@ -33,7 +39,7 @@ const standardStore = useStandardStore()
         <div class="label">
           标准状态
         </div>
-        <div v-for="row of standardStore.stateLists" class="option">
+        <div v-for="row of standardStore.stateLists" :key="row.mName" class="option" @click="handleKey(row)">
           {{ row.mName }}
         </div>
       </div>
@@ -42,27 +48,32 @@ const standardStore = useStandardStore()
 </template>
 
 <style scoped>
-.title{
-  width:20%;
-  color:var(--font-blue);
+.title {
+  width: 20%;
+  color: var(--font-blue);
   border-bottom: 2px solid var(--font-blue);
 }
-.spacer{
-  width:80%;
+
+.spacer {
+  width: 80%;
 }
-.label{
+
+.label {
   font-weight: bold;
 }
-.keyMatchContainer{
+
+.keyMatchContainer {
   box-shadow: 0 0 0.5px var(--border-gray);
-  margin:0.25rem;
-  padding:0.5rem;
+  margin: 0.25rem;
+  padding: 0.5rem;
 }
-.standardType{
-  padding:0.25rem;
-  font-size:0.8125rem;
+
+.standardType {
+  padding: 0.25rem;
+  font-size: 0.8125rem;
 }
-.option{
+
+.option {
   font-size: 0.75rem;
 }
 </style>

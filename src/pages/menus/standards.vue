@@ -6,6 +6,7 @@
   <standardAside />
   <main>
     <StandsList />
+    <Pagination />
   </main>
 </template>
 
