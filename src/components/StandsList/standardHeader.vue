@@ -3,6 +3,7 @@ import { useStandardStore } from '~/stores/standard'
 import { $getStandard } from '~/composables/http'
 const standardStore = useStandardStore()
 const handleKey = async (row: any) => {
+  standardStore.standardLists = []
   const res = await $getStandard(row.requestKey)
   console.log(res)
   standardStore.standardLists = res.data.data
@@ -20,28 +21,52 @@ const handleKey = async (row: any) => {
     </div>
     <div class="keyMatchContainer">
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label">
+        <div class="label" w15>
           标准类型
         </div>
-        <div v-for="row of standardStore.typeLists" :key="row.mName" class="option" @click="handleKey(row)">
+        <button v-for="row of standardStore.typeLists" :key="row.mName" class="option" @click="handleKey(row)">
           {{ row.mName }}
-        </div>
+        </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label">
+        <div class="label" w15>
           标准性质
         </div>
-        <div v-for="row of standardStore.propertyLists" :key="row.mName" class="option" @click="handleKey(row)">
+        <button v-for="row of standardStore.propertyLists" :key="row.mName" class="option" @click="handleKey(row)">
           {{ row.mName }}
-        </div>
+        </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label">
+        <div class="label" w15>
           标准状态
         </div>
-        <div v-for="row of standardStore.stateLists" :key="row.mName" class="option" @click="handleKey(row)">
+        <button v-for="row of standardStore.stateLists" :key="row.mName" class="option" @click="handleKey(row)">
           {{ row.mName }}
+        </button>
+      </div>
+      <div class="standardType" flex justify-start items-center gap-2>
+        <div class="label" w15>
+          行业分类
         </div>
+        <button v-for="row of standardStore.industryLists" :key="row.mName" class="option" @click="handleKey(row)">
+          {{ row.mName }}
+        </button>
+      </div>
+      <div class="standardType" flex justify-start items-center gap-2>
+        <div class="label" w15>
+          区域/地方
+        </div>
+        <button v-for="row of standardStore.areaLists" :key="row.mName" class="option" @click="handleKey(row)">
+          {{ row.mName }}
+        </button>
+      </div>
+      <div class="standardType" flex justify-start items-center gap-2>
+        <div class="label" w15>
+          ICS分类
+        </div>
+        <button v-for="row of standardStore.ICSLists" :key="row.mName" class="option" @click="handleKey(row)">
+          {{ row.mName }}
+        </button>
       </div>
     </div>
   </div>
@@ -75,5 +100,12 @@ const handleKey = async (row: any) => {
 
 .option {
   font-size: 0.75rem;
+
+}
+.option:hover{
+  text-shadow: 0 0 5px var(--font-blue-shallow);
+}
+.option:focus{
+  text-shadow: 0 0 5px var(--font-blue)
 }
 </style>

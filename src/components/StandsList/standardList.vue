@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { useRouter } from 'vue-router'
 import { useStandardStore } from '~/stores/standard'
-import { usePaginationStore } from '~/stores/utils/Pagination'
+import { usePaginationStore } from '~/stores/standard/Pagination'
 const paginationStore = usePaginationStore()
 const router = useRouter()
 const standardStore = useStandardStore()

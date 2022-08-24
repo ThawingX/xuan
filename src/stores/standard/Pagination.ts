@@ -11,5 +11,6 @@ export const usePaginationStore = defineStore('Pagination', {
   getters: {
   },
   actions: {
+
   },
 })

@@ -66,7 +66,56 @@ export const useStandardStore = defineStore('standard', {
           requestKey: 'obsolete',
         },
       ],
-
+      industryLists: [
+        {
+          mName: 'LD 劳动和劳动安全',
+          requestKey: 'LD',
+        },
+        {
+          mName: 'YY 医药',
+          requestKey: 'YY',
+        },
+        {
+          mName: 'FZ 纺织',
+          requestKey: 'FZ',
+        },
+        {
+          mName: 'QB 轻工',
+          requestKey: 'QB',
+        },
+      ],
+      areaLists: [
+        {
+          mName: '湖北',
+          requestKey: 'Hubei',
+        },
+        {
+          mName: '山东',
+          requestKey: 'Shandong',
+        },
+        {
+          mName: '重庆',
+          requestKey: 'Chongqing',
+        },
+        {
+          mName: '上海',
+          requestKey: 'Shanghai',
+        },
+      ],
+      ICSLists: [
+        {
+          mName: '11_医药卫生技术',
+          requestKey: '11',
+        },
+        {
+          mName: '13_环保、保健和安全',
+          requestKey: '13',
+        },
+        {
+          mName: '55_货物的包装和调运',
+          requestKey: 'replaced',
+        },
+      ],
     }
   },
   getters: {
