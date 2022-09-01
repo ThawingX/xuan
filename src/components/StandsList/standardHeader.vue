@@ -21,7 +21,7 @@ const handleKey = async (row: any) => {
     </div>
     <div class="keyMatchContainer">
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label" w15>
+        <div class="label" w20>
           标准类型
         </div>
         <button v-for="row of standardStore.typeLists" :key="row.mName" class="option" @click="handleKey(row)">
@@ -29,7 +29,7 @@ const handleKey = async (row: any) => {
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label" w15>
+        <div class="label" w20>
           标准性质
         </div>
         <button v-for="row of standardStore.propertyLists" :key="row.mName" class="option" @click="handleKey(row)">
@@ -37,7 +37,7 @@ const handleKey = async (row: any) => {
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label" w15>
+        <div class="label" w20>
           标准状态
         </div>
         <button v-for="row of standardStore.stateLists" :key="row.mName" class="option" @click="handleKey(row)">
@@ -45,7 +45,7 @@ const handleKey = async (row: any) => {
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label" w15>
+        <div class="label" w20>
           行业分类
         </div>
         <button v-for="row of standardStore.industryLists" :key="row.mName" class="option" @click="handleKey(row)">
@@ -53,7 +53,7 @@ const handleKey = async (row: any) => {
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label" w15>
+        <div class="label" w20>
           区域/地方
         </div>
         <button v-for="row of standardStore.areaLists" :key="row.mName" class="option" @click="handleKey(row)">
@@ -61,7 +61,7 @@ const handleKey = async (row: any) => {
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
-        <div class="label" w15>
+        <div class="label" w20>
           ICS分类
         </div>
         <button v-for="row of standardStore.ICSLists" :key="row.mName" class="option" @click="handleKey(row)">

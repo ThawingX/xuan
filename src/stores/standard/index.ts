@@ -84,24 +84,6 @@ export const useStandardStore = defineStore('standard', {
           requestKey: 'QB',
         },
       ],
-      areaLists: [
-        {
-          mName: '湖北',
-          requestKey: 'Hubei',
-        },
-        {
-          mName: '山东',
-          requestKey: 'Shandong',
-        },
-        {
-          mName: '重庆',
-          requestKey: 'Chongqing',
-        },
-        {
-          mName: '上海',
-          requestKey: 'Shanghai',
-        },
-      ],
       ICSLists: [
         {
           mName: '11_医药卫生技术',
@@ -114,6 +96,152 @@ export const useStandardStore = defineStore('standard', {
         {
           mName: '55_货物的包装和调运',
           requestKey: 'replaced',
+        },
+      ],
+      cites: [
+        {
+          cityName: '四川',
+          cityCode: 'Sichuan',
+        },
+        {
+          cityName: '湖北',
+          cityCode: 'Hubei',
+        },
+        {
+          cityName: '山东',
+          cityCode: 'Shandong',
+        },
+        {
+          cityName: '重庆',
+          cityCode: 'Chongqing',
+        },
+        {
+          cityName: '上海',
+          cityCode: 'Shanghai',
+        },
+        {
+          cityName: '北京',
+          cityCode: 'Beijing',
+        },
+        {
+          cityName: '天津',
+          cityCode: 'Tianjin',
+        },
+        {
+          cityName: '河北',
+          cityCode: 'Hebei',
+        },
+        {
+          cityName: '河南',
+          cityCode: 'Henan',
+        },
+        {
+          cityName: '湖南',
+          cityCode: 'Hunan',
+        },
+        {
+          cityName: '江苏',
+          cityCode: 'Jiangsu',
+        },
+        {
+          cityName: '浙江',
+          cityCode: 'Zhejiang',
+        },
+        {
+          cityName: '安徽',
+          cityCode: 'Anhui',
+        },
+        {
+          cityName: '福建',
+          cityCode: 'Fujian',
+        },
+        {
+          cityName: '江西',
+          cityCode: 'Jiangxi',
+        },
+        {
+          cityName: '山西',
+          cityCode: 'Shanxi',
+        },
+        {
+          cityName: '内蒙古',
+          cityCode: 'Neimenggu',
+        },
+        {
+          cityName: '广西',
+          cityCode: 'Guangxi',
+        },
+        {
+          cityName: '西藏',
+          cityCode: 'Xizang',
+        },
+        {
+          cityName: '陕西',
+          cityCode: 'Shanxi',
+        },
+        {
+          cityName: '甘肃',
+          cityCode: 'Gansu',
+        },
+        {
+          cityName: '青海',
+          cityCode: 'Qinghai',
+        },
+        {
+          cityName: '宁夏',
+          cityCode: 'Ningxia',
+        },
+        {
+          cityName: '新疆',
+          cityCode: 'Xinjiang',
+        },
+        {
+          cityName: '贵州',
+          cityCode: 'Guizhou',
+        },
+        {
+          cityName: '云南',
+          cityCode: 'Yunnan',
+        },
+        {
+          cityName: '海南',
+          cityCode: 'Hainan',
+        },
+        {
+          cityName: '台湾',
+          cityCode: 'Taiwan',
+        },
+        {
+          cityName: '香港',
+          cityCode: 'Hongkong',
+        },
+        {
+          cityName: '澳门',
+          cityCode: 'Macao',
+        },
+        {
+          cityName: '甘肃',
+          cityCode: 'Gansu',
+        },
+        {
+          cityName: '辽宁',
+          cityCode: 'Liaoning',
+        },
+        {
+          cityName: '吉林',
+          cityCode: 'Jilin',
+        },
+        {
+          cityName: '黑龙江',
+          cityCode: 'Heilongjiang',
+        },
+        {
+          cityName: '其他',
+          cityCode: 'Other',
+        },
+        {
+          cityName: '全国',
+          cityCode: 'Global',
         },
       ],
     }

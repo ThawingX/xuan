@@ -7,7 +7,7 @@ const mainStore = useMainStore()
   <header flex justify-center gap16>
     <!-- key需要注意修改 -->
     <router-link
-      v-for="row of mainStore.topMenuList" :key="row.mName" m1 active-class="active" class="menus" text-xs
+      v-for="row of mainStore.topMenuList" :key="row.mName" m1 active-class="active" class="menus" text-sm
       :to="row.route"
     >
       {{ row.mName }}

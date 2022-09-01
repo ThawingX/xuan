@@ -44,8 +44,8 @@ const onSubmit = () => {
 <template>
   <main flex justify-center items-center pt5>
     <div class="container">
-      <el-form size="large" :model="standardFormStore.StandardForm" label-width="8rem">
-        <div class="inlineContainer" flex justify-center items-center>
+      <el-form size="large" :model="standardFormStore.StandardForm" label-width="10rem">
+        <div class="inlineContainer" flex justify-center items-start>
           <div class="left">
             <el-form-item label="标准号">
               <el-input v-model="standardFormStore.StandardForm.key" />
@@ -56,35 +56,25 @@ const onSubmit = () => {
             <el-form-item label="英文标准名称">
               <el-input v-model="standardFormStore.StandardForm.enName" />
             </el-form-item>
-            <el-form-item label="标准状态">
-              <el-select v-model="standardFormStore.StandardForm.state" placeholder="请选择标准的状态">
-                <el-option
-                  v-for="row of standardStore.stateLists" :key="row.mName" :label="row.mName"
-                  :value="row.requestKey"
-                />
-              </el-select>
-            </el-form-item>
             <el-form-item label="中文标准分类号">
               <el-input v-model="standardFormStore.StandardForm.CCS" />
             </el-form-item>
             <el-form-item label="英文标准分类号">
               <el-input v-model="standardFormStore.StandardForm.ICS" />
             </el-form-item>
-            <el-form-item label="标准性质">
-              <el-select v-model="standardFormStore.StandardForm.property" placeholder="请选择标准的性质">
-                <el-option
-                  v-for="row of standardStore.propertyLists" :key="row.mName" :label="row.mName"
-                  :value="row.requestKey"
-                />
-              </el-select>
-            </el-form-item>
           </div>
-          <div class="right">
+          <div class="middle">
             <el-form-item label="发布日期">
-              <el-input v-model="standardFormStore.StandardForm.pubDate" />
+              <el-date-picker
+                v-model="standardFormStore.StandardForm.pubDate" :clearable="false" type="date"
+                placeholder="选择日期" style="width: 100%"
+              />
             </el-form-item>
             <el-form-item label="实施日期">
-              <el-input v-model="standardFormStore.StandardForm.doDate" />
+              <el-date-picker
+                v-model="standardFormStore.StandardForm.doDate" :clearable="false" type="date"
+                placeholder="选择日期" style="width: 100%"
+              />
             </el-form-item>
             <el-form-item label="归口部门">
               <el-input v-model="standardFormStore.StandardForm.centialDepartment" />
@@ -95,8 +85,23 @@ const onSubmit = () => {
             <el-form-item label="发布单位">
               <el-input v-model="standardFormStore.StandardForm.pubDeparment" />
             </el-form-item>
-            <el-form-item label="备注">
-              <el-input v-model="standardFormStore.StandardForm.comment" />
+          </div>
+          <div class="right">
+            <el-form-item label="标准状态">
+              <el-select v-model="standardFormStore.StandardForm.state" placeholder="请选择标准的状态">
+                <el-option
+                  v-for="row of standardStore.stateLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item label="标准性质">
+              <el-select v-model="standardFormStore.StandardForm.property" placeholder="请选择标准的性质">
+                <el-option
+                  v-for="row of standardStore.propertyLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
             </el-form-item>
             <el-form-item label="标准类型">
               <el-select v-model="standardFormStore.StandardForm.type" placeholder="请选择标准的类型">
@@ -106,7 +111,36 @@ const onSubmit = () => {
                 />
               </el-select>
             </el-form-item>
+            <el-form-item label="行业分类">
+              <el-select v-model="standardFormStore.StandardForm.type" placeholder="请选择标准的类型">
+                <el-option
+                  v-for="row of standardStore.typeLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item label="ICS分类">
+              <el-select v-model="standardFormStore.StandardForm.type" placeholder="请选择标准的类型">
+                <el-option
+                  v-for="row of standardStore.typeLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
+            </el-form-item>
           </div>
+        </div>
+        <div class="bottomForm" flex justify-start items-start>
+          <el-form-item label="区域/地方">
+            <el-select v-model="standardFormStore.StandardForm.state" placeholder="请选择区域">
+              <el-option
+                v-for="row of standardStore.cites" :key="row.cityCode" :label="row.cityName"
+                :value="row.cityCode"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="备注" flex-1>
+            <el-input v-model="standardFormStore.StandardForm.comment" type="textarea" />
+          </el-form-item>
         </div>
       </el-form>
       <div class="submitContainer" justify-center flex flex-col>
