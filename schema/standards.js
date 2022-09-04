@@ -23,8 +23,8 @@ const StandardSchema = schema({
     releaseTime: Date,
 })
 
-const Standard = model('Standard', StandardSchema)
+const standardModel = model('Standard', StandardSchema)
 
 module.exports = {
-    Standard
+    standardModel
 }

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Standard } = require('../schema/standards');
-const { options } = require('./option');
+const { standardModel } = require('../schema/standards');
 
 /* get standards by id. */
 router.get('/', function (req, res, next) {
@@ -36,7 +35,7 @@ router.put('/', function (req, res, next) {
 /* get standards list. */
 router.get('/list', async function (req, res, next) {
     try {
-        const result = await Standard.find({}).limit(20)
+        const result = await standardModel.find({}).limit(50)
         res.json(result)
     } catch (err) {
         res.send(err)
