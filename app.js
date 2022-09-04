@@ -10,6 +10,7 @@ const usersRouter = require('./routes/users');
 const standardsRouter = require('./routes/standards');
 const detectItemRouter = require('./routes/detectItem');
 const optionRouter = require('./routes/option');
+const roleRouter = require('./routes/role')
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/user', usersRouter);
 app.use('/standard', standardsRouter);
 app.use('/detectItem', detectItemRouter);
 app.use('/option', optionRouter);
+app.use('/role', roleRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

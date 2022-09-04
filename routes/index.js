@@ -1,5 +1,5 @@
-const  express = require('express');
-const  router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -7,24 +7,14 @@ router.get('/', function (req, res, next) {
 });
 
 /* get menu. */
-router.get('/getRoute', function (req, res, next) {
-  res.send('get menu')
-});
+router.get('/getRoute', require('../method/index/getRoute'));
 
 /* get userInfo. */
-router.get('/getUserinfo', function (req, res, next) {
-  res.send('get userInfo')
-});
+router.get('/getUserinfo', require('../method/index/getUserinfo'));
 
 /* check login state. */
 router.post('/checkLogin', function (req, res, next) {
   res.send('check login state')
 });
-
-/* check login state. */
-router.get('/checkLogin', function (req, res, next) {
-  res.send('check login state')
-});
-
 
 module.exports = router;

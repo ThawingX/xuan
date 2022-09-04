@@ -5,11 +5,9 @@ const router = express.Router();
 router.get('/list', require('../method/option/getListByName'));
 
 /* create option. */
-router.post('/', require('../method/option/createOption'));
+router.post('/', require('../method/option/create'));
 
 /* delete option */
-router.delete('/', function (req, res, next) {
-    res.send('delete option');
-});
+router.delete('/',require('../method/option/delete'));
 
 module.exports = router;
