@@ -9,7 +9,7 @@ router.get('/', require('../method/users/getById'));
 router.get('/list', require('../method/users/getList'));
 
 /* delete user by id */
-router.delete('/', require('../method/users/deleteById'));
+router.delete('/', require('../method/users/delete'));
 
 /* create user */
 router.post('/', require('../method/users/createUser'));

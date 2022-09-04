@@ -3,24 +3,63 @@ const schema = mongoose.Schema
 const model = mongoose.model
 
 const StandardSchema = schema({
-    id: String,
-    chName: String,
-    enName: String,
-    type: String,
-    state: String,
-    property: String,
-    city: String,
-    CCS: String,
-    ICS: String,
-    administrativeDepartment: String,
-    responsibleDepartment: String,
-    releaseDepartment: String,
-    comment: String,
-    url: String,
-    industryClassfication: String,
-    ICSClassfication: String,
-    implementationTime: Date,
-    releaseTime: Date,
+    id: {
+        type: String,
+        required: true,
+        index: { unique: true }
+    },
+    chName: {
+        type: String,
+    },
+    enName: {
+        type: String,
+
+    },
+    standardType: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    property: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    CCS: {
+        type: String
+    },
+    ICS: {
+        type: String
+    },
+    administrativeDepartment: {
+        type: String
+    },
+    responsibleDepartment: {
+        type: String
+    },
+    releaseDepartment: {
+        type: String
+    },
+    comment: {
+        type: String
+    },
+    url: {
+        type: String
+    },
+    industryClassfication: {
+        type: String
+    },
+    ICSClassfication: {
+        type: String
+    },
+    implementationTime: {
+        type: Date
+    },
+    releaseTime: {
+        type: Date
+    },
 })
 
 const standardModel = model('Standard', StandardSchema)
