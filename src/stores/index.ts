@@ -5,11 +5,11 @@ export const useMainStore = defineStore('main', {
       topMenuList: [
         {
           mName: '标准',
-          route: { path: '/menus/standards' },
+          route: { path: '/menus/standardList' },
         },
         {
           mName: '产品检测',
-          route: { path: '/menus/productCheck' },
+          route: { path: '/menus/product' },
         },
         {
           mName: '仪器设备',
@@ -17,7 +17,11 @@ export const useMainStore = defineStore('main', {
         },
         {
           mName: '标准录入',
-          route: { path: '/menus/inputData' },
+          route: { path: '/menus/standardEntry' },
+        },
+        {
+          mName: '检测项录入',
+          route: { path: '/menus/testInformationEntry' },
         },
       ],
     }

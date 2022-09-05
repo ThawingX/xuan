@@ -29,6 +29,10 @@ function backHome() {
 </template>
 
 <style scoped>
+header {
+  width: 100%;
+}
+
 .connection {
   background-color: var(--bg-blue);
 }

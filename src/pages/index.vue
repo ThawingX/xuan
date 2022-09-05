@@ -11,7 +11,7 @@ const selfNotification = () => {
 }
 onMounted(() => {
   selfNotification()
-  router.push('/menus/standards')
+  router.push('/menus/standardList')
 })
 </script>
 

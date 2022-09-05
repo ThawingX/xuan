@@ -80,7 +80,7 @@ const handleKey = async (row: any) => {
 }
 
 .spacer {
-  width: 80%;
+  width: 180%;
 }
 
 .label {

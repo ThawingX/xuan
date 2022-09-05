@@ -4,23 +4,22 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  --bg-blue:#8bc8fe;
-  --bg-blue-shallow:#c6e4ff;
-  --bg-white:#f3f4f6;
-  --bg-gray:#e0e8eb;
-  --bg-show-header-gray:#e2e7eb;
-  --active-font-gray:#717577;
-  --noActive-font-gray:#c5c9cb;
-  --border-gray:#757575;
-  --border-gray-deep:#696969;
-  --font-blue:#3e72b0;
-  --font-blue-shallow:#90a2d4;
-  --font-blue-deep:#2d70aa;
-  --font-gray:#bec0c4;
-  --font-gray-deep:#99a5ab;
+  --bg-blue: #8bc8fe;
+  --bg-blue-shallow: #c6e4ff;
+  --bg-white: #f3f4f6;
+  --bg-gray: #e0e8eb;
+  --bg-show-header-gray: #e2e7eb;
+  --active-font-gray: #717577;
+  --noActive-font-gray: #c5c9cb;
+  --border-gray: #757575;
+  --border-gray-deep: #696969;
+  --font-blue: #3e72b0;
+  --font-blue-shallow: #90a2d4;
+  --font-blue-deep: #2d70aa;
+  --font-gray: #bec0c4;
+  --font-gray-deep: #99a5ab;
 }
 
-html::-webkit-scrollbar{
+html::-webkit-scrollbar {
   display: none;
 }
-
