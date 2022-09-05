@@ -53,22 +53,13 @@ const deleteSubOption = function (row: any) {
       console.warn(err)
     })
 }
-
-const addSubOption = function () {
-  const config = {
-    method: 'post',
-    url: 'http://119.3.243.150:3399/option',
-    headers: { },
-  }
-  axios(config)
-    .then((res) => {
-    })
-    .catch((err) => {
-      console.warn(err)
-    })
+const showAddOptionDialog = function () {
+  standardFormStore.isShowAddOptionDialog = true
+//   addSubOption()
 }
-const addOptionToForm = function () {
 
+const addOptionToForm = function () {
+  standardFormStore.isShowOptionDialog = false
 }
 </script>
 
@@ -105,7 +96,7 @@ const addOptionToForm = function () {
     </div>
     <!--  添加 和 确定按钮 -->
     <div class="bottom">
-      <el-button type="warning" @click="addSubOption()">
+      <el-button type="warning" @click="showAddOptionDialog">
         添加
       </el-button>
       <el-button type="primary" @click="addOptionToForm()">
@@ -113,6 +104,7 @@ const addOptionToForm = function () {
       </el-button>
     </div>
   </el-dialog>
+  <addOptionDialog />
 </template>
 
 <style scoped>

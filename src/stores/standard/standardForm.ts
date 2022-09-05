@@ -23,6 +23,7 @@ export const useStandardFormStore = defineStore('standardForm', {
         releaseTime: '',
       },
       isShowOptionDialog: false,
+      isShowAddOptionDialog: false,
       subOption: {
         id: '',
         optionName: '',
