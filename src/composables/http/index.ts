@@ -9,12 +9,11 @@ export const $submit = async (data = {}) => {
   })
 }
 
-export const $getStandard = async (requestKey = 'all') => {
+export const $getStandard = async () => {
   return axios({
-    method: 'post',
-    url: 'http://119.3.243.150:3399/getList',
+    method: 'get',
+    url: 'http://119.3.243.150:3399/standard/list',
     headers: {},
-    data: { requestKey },
   })
 }
 

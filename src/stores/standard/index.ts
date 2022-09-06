@@ -251,6 +251,9 @@ export const useStandardStore = defineStore('standard', {
   },
   actions: {
     getDivideStandardLists(dividedNums = 10, currPage = 1, totalPage = 10): number[] {
+      if (!this.standardLists)
+        return []
+
       return this.standardLists.slice(dividedNums * (currPage - 1), currPage * dividedNums)
     },
   },

@@ -14,20 +14,18 @@ function turnToDetail(row: any) {
   <div class="standardsList">
     <div v-for="row of standardStore.getDivideStandardLists(paginationStore.pageSize, paginationStore.currPage, paginationStore.total)" :key="row.key" class="standardItem" m2 p2 flex flex-col>
       <div class="header" flex justify-start items-baseline gap-2>
-        <span class="sKey" cursor-pointer @click="turnToDetail(row)">{{ row.key }}</span>
+        <span class="sKey" cursor-pointer @click="turnToDetail(row)">{{ row.id }}</span>
         <span class="chName" text-sm>{{ row.chName }}</span>
       </div>
       <div class="CS" mt2 text-xs flex justify-start items-center gap-4>
         <span class="ICS" flex items-center>
-          <div inline-block i-carbon-earth />{{ row.ICS }}
+          ICS:{{ row.ICS }}
         </span>
         <span class="CCS" flex items-center>
-          <div inline-block i-carbon-hybrid-networking />{{ row.ICS }}
-          {{ row.CCS }}
+          CCS:{{ row.CCS }}
         </span>
       </div>
       <div class="department" mt-2 text-sm flex items-center>
-        <div inline-block i-carbon-application-mobile />
         归口单位&nbsp
         <div inline-block text-1 color-gray>
           {{ row.centialDepartment }}
