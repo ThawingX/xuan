@@ -18,7 +18,7 @@ const handleClose = function (done: () => void) {
 const handleSeach = function () {
   alert('search')
 }
-const handleOpen = function () {
+const getOptionLIst = function () {
   const config = {
     method: 'get',
     url: `http://119.3.243.150:3399/option/list?optionName=${optionStore.subOption.optionName}`,
@@ -32,7 +32,7 @@ const handleOpen = function () {
       console.warn(err)
     })
 }
-const deleteSubOption = function (row: any) {
+const deleteSubOption = async function (row: any) {
   const config = {
     method: 'delete',
     url: 'http://119.3.243.150:3399/option',
@@ -51,6 +51,7 @@ const deleteSubOption = function (row: any) {
     .catch((err) => {
       console.warn(err)
     })
+  await getOptionLIst()
 }
 const clickSubOption = function (row: any) {
   standardFormStore.StandardForm[optionStore.subOption.optionName] = row.subOptionName
@@ -73,7 +74,7 @@ const closeOptionDialog = function () {
     :before-close="handleClose"
     :draggable="true"
     :close-on-click-modal="false"
-    @open="handleOpen"
+    @open="getOptionLIst"
   >
     <!--  table显示，内含删除按钮 -->
     <div class="tableContainer">

@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AddDetectItemDialog: typeof import('./src/components/DetectItem/addDetectItemDialog.vue')['default']
     AddOptionDialog: typeof import('./src/components/StandsList/addOptionDialog.vue')['default']
     DetailStandard: typeof import('./src/components/detailStandard.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
