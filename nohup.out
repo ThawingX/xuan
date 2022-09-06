@@ -1,0 +1,11 @@
+3399
+connect mongodb:3333
+[0mGET /option/list?optionName=releaseDepartment [36m304 [0m15.429 ms - -[0m
+[0mPOST /option [32m200 [0m15.963 ms - 12[0m
+[0mGET /option/list?optionName=releaseDepartment [32m200 [0m3.132 ms - 137[0m
+[0mGET /option/list?optionName=releaseDepartment [36m304 [0m3.028 ms - -[0m
+[0mDELETE /option [32m200 [0m5.971 ms - 12[0m
+[0mGET /option/list?optionName=releaseDepartment [32m200 [0m2.934 ms - 2[0m
+[0mPOST /option [32m200 [0m4.831 ms - 12[0m
+[0mGET /option/list?optionName=releaseDepartment [32m200 [0m2.868 ms - 70[0m
+[0mGET /option/list?optionName=industry [32m200 [0m3.181 ms - 2[0m
