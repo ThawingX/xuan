@@ -15,15 +15,36 @@ const addSubOption = function () {
       commiter: 'optionStore.subOption.commiter',
     },
   }
+  return new Promise((resolve, reject) => {
+    axios(config)
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        console.warn(err)
+        reject(err)
+      })
+  })
+}
+const handleOpen = function () {
+  const config = {
+    method: 'get',
+    url: `http://119.3.243.150:3399/option/list?optionName=${optionStore.subOption.optionName}`,
+    headers: { },
+  }
   axios(config)
     .then((res) => {
+      optionStore.optionList = res.data
     })
     .catch((err) => {
       console.warn(err)
     })
 }
-const addSuboption = function () {
-  addSubOption()
+
+const addBtn = async function () {
+  const res = await addSubOption()
+  const res2 = await handleOpen()
+  console.log(optionStore.optionList)
   standardFormStore.isShowAddOptionDialog = false
 }
 </script>
@@ -37,9 +58,9 @@ const addSuboption = function () {
     :close-on-click-modal="false"
   >
     <el-input v-model="optionStore.subOption.subOptionName " />
-    <!--  添加 和 确定按钮 -->
+    <!-- 确定按钮 -->
     <div class="bottom">
-      <el-button type="primary" @click="addSuboption()">
+      <el-button type="primary" @click="addBtn()">
         确定
       </el-button>
     </div>

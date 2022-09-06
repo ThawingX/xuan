@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Delete } from '@element-plus/icons-vue'
+import { Check, Delete } from '@element-plus/icons-vue'
 import axios from 'axios'
 import { ElMessageBox } from 'element-plus'
 import { useStandardFormStore } from '~/stores/standard/standardForm'
@@ -33,7 +33,6 @@ const handleOpen = function () {
     })
 }
 const deleteSubOption = function (row: any) {
-  console.log(optionStore.subOption)
   const config = {
     method: 'delete',
     url: 'http://119.3.243.150:3399/option',
@@ -53,12 +52,15 @@ const deleteSubOption = function (row: any) {
       console.warn(err)
     })
 }
+const clickSubOption = function (row: any) {
+  standardFormStore.StandardForm[optionStore.subOption.optionName] = row.subOptionName
+  standardFormStore.isShowOptionDialog = false
+}
 const showAddOptionDialog = function () {
   standardFormStore.isShowAddOptionDialog = true
-//   addSubOption()
 }
 
-const addOptionToForm = function () {
+const closeOptionDialog = function () {
   standardFormStore.isShowOptionDialog = false
 }
 </script>
@@ -66,22 +68,13 @@ const addOptionToForm = function () {
 <template>
   <el-dialog
     v-model="standardFormStore.isShowOptionDialog"
-    title="录入项"
+    :title="optionStore.subOption.optionName"
     width="50%"
     :before-close="handleClose"
     :draggable="true"
     :close-on-click-modal="false"
     @open="handleOpen"
   >
-    <!--  标准id  查找 -->
-    <div class="searchContainer" flex justify-center items-center gap-8>
-      <el-button type="primary" @click="handleSeach">
-        查找
-      </el-button>
-      <el-input v-model="optionStore.subOption.id" label="标准号" :clearable="true" placeholder="请输入标准号" />
-      <el-input label="中文标准名称" :disabled="true" placeholder="中文标准名称" />
-      <el-input label="英文标准名称" :disabled="true" placeholder="英文标准名称" />
-    </div>
     <!--  table显示，内含删除按钮 -->
     <div class="tableContainer">
       <el-table height="250" :stripe="true" :data="optionStore.optionList" style="width: 100%">
@@ -89,7 +82,8 @@ const addOptionToForm = function () {
         <el-table-column prop="commiter" label="创建人" />
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button type="danger" size="small" :icon="Delete" circle @click="deleteSubOption(scope)" />
+            <el-button type="danger" size="small" :icon="Delete" circle @click="deleteSubOption(scope.row)" />
+            <el-button type="success" size="small" :icon="Check" circle @click="clickSubOption(scope.row)" />
           </template>
         </el-table-column>
       </el-table>
@@ -99,8 +93,8 @@ const addOptionToForm = function () {
       <el-button type="warning" @click="showAddOptionDialog">
         添加
       </el-button>
-      <el-button type="primary" @click="addOptionToForm()">
-        确定
+      <el-button type="primary" @click="closeOptionDialog()">
+        关闭
       </el-button>
     </div>
   </el-dialog>

@@ -8,7 +8,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AddOptionDialog: typeof import('./src/components/StandsList/addOptionDialog.vue')['default']
-    copy: typeof import('./src/components/StandsList/optionDialog copy.vue')['default']
     DetailStandard: typeof import('./src/components/detailStandard.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']

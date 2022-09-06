@@ -1,18 +1,18 @@
 import axios from 'axios'
 
-export const $upload = async (data = []) => {
+export const $submit = async (data = {}) => {
   return axios({
     method: 'post',
-    url: 'http://119.3.243.150:3300/upload',
+    url: 'http://119.3.243.150:3399/standard',
     headers: {},
-    data,
+    data: { ...data },
   })
 }
 
 export const $getStandard = async (requestKey = 'all') => {
   return axios({
     method: 'post',
-    url: 'http://119.3.243.150:3300/getList',
+    url: 'http://119.3.243.150:3399/getList',
     headers: {},
     data: { requestKey },
   })
@@ -21,7 +21,7 @@ export const $getStandard = async (requestKey = 'all') => {
 export const $search = async (searchKey = '') => {
   return axios ({
     method: 'post',
-    url: 'http://119.3.243.150:3300/checkStandard',
+    url: 'http://119.3.243.150:3399/checkStandard',
     headers: {},
     data: { searchKey },
   })
@@ -29,7 +29,7 @@ export const $search = async (searchKey = '') => {
 export const $registerUser = async (searchKey = '') => {
   return axios ({
     method: 'post',
-    url: 'http://119.3.243.150:3300/checkStandard',
+    url: 'http://119.3.243.150:3399/checkStandard',
     headers: {},
     data: { searchKey },
   })
@@ -38,7 +38,7 @@ export const $registerUser = async (searchKey = '') => {
 export const $getUserinfo = async (searchKey = '') => {
   return axios ({
     method: 'post',
-    url: 'http://119.3.243.150:3300/checkStandard',
+    url: 'http://119.3.243.150:3399/checkStandard',
     headers: {},
     data: { searchKey },
   })
