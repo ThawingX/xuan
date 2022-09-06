@@ -9,3 +9,7 @@ connect mongodb:3333
 [0mPOST /option [32m200 [0m4.831 ms - 12[0m
 [0mGET /option/list?optionName=releaseDepartment [32m200 [0m2.868 ms - 70[0m
 [0mGET /option/list?optionName=industry [32m200 [0m3.181 ms - 2[0m
+3399
+connect mongodb:3333
+[0mGET /standard?id=1 [32m200 [0m17.408 ms - 433[0m
+[0mGET /detectItem?id=1 [32m200 [0m13.241 ms - 655[0m
