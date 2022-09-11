@@ -1,20 +1,14 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox, ElNotification } from 'element-plus';
+import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
+import { useLoginFormStore } from '~/stores/login/loginForm'
+import { useRegisterFormStore } from '~/stores/login/registerForm'
+import { useLoginPageStore } from '~/stores/login/loginPage'
 const router = useRouter()
-const loginForm: any = reactive({
-  account: '',
-  password: '',
-})
-const registerForm: any = reactive({
-  name: '',
-  phone: '',
-  email: '',
-  IDNumber: '',
-})
-const formLabelWidth = ref('10rem')
-const isShowRegister = ref(false)
+const LoginFormStore = useLoginFormStore()
+const registerFormStore = useRegisterFormStore()
+const loginPageStore = useLoginPageStore()
 const registerAccount = function () {
   ElMessageBox.confirm(
     '是否联系管理员，获取账号？',
@@ -23,10 +17,10 @@ const registerAccount = function () {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'warning',
-    }
+    },
   )
     .then(() => {
-      isShowRegister.value = true
+      loginPageStore.isShowRegisterForm = true
     })
     .catch(() => {
     })
@@ -47,7 +41,7 @@ const recallPassword = function () {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'warning',
-    }
+    },
   )
     .then(() => {
       ElNotification({
@@ -83,9 +77,15 @@ const login = function () {
         </el-form>
       </div>
       <div class="buttonGroup">
-        <el-button size="small" type="warning" @click="registerAccount">申请账号</el-button>
-        <el-button size="small" type="info" @click="recallPassword">找回密码</el-button>
-        <el-button size="small" type="primary" @click="login">登录</el-button>
+        <el-button size="small" type="warning" @click="registerAccount">
+          申请账号
+        </el-button>
+        <el-button size="small" type="info" @click="recallPassword">
+          找回密码
+        </el-button>
+        <el-button size="small" type="primary" @click="login">
+          登录
+        </el-button>
       </div>
     </div>
   </div>
