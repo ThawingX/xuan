@@ -9,7 +9,7 @@ const router = useRouter()
 const LoginFormStore = useLoginFormStore()
 const registerFormStore = useRegisterFormStore()
 const loginPageStore = useLoginPageStore()
-const registerAccount = function () {
+const openRegisterBox = function () {
   ElMessageBox.confirm(
     '是否联系管理员，获取账号？',
     '警告',
@@ -20,18 +20,24 @@ const registerAccount = function () {
     },
   )
     .then(() => {
+      registerFormStore.$reset()
       loginPageStore.isShowRegisterForm = true
     })
     .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '打开失败，请稍后重试',
+      })
     })
 }
+
 const sendRegisterRequest = function () {
   ElNotification({
     title: '成功',
     message: '申请成功，请等待管理员审核',
     type: 'success',
   })
-  isShowRegister.value = false
+  loginPageStore.isShowRegisterForm = false
 }
 const recallPassword = function () {
   ElMessageBox.confirm(
@@ -67,17 +73,17 @@ const login = function () {
   <div class="container" flex justify-center items-center>
     <div class="loginBox" flex justify-center items-center flex-col>
       <div class="loginForm">
-        <el-form :model="loginForm" label-width="4rem">
+        <el-form :model="LoginFormStore" label-width="4rem">
           <el-form-item label="账号">
-            <el-input v-model="loginForm.account" />
+            <el-input v-model="LoginFormStore.account" />
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="loginForm.password" />
+            <el-input v-model="LoginFormStore.password" />
           </el-form-item>
         </el-form>
       </div>
       <div class="buttonGroup">
-        <el-button size="small" type="warning" @click="registerAccount">
+        <el-button size="small" type="warning" @click="openRegisterBox">
           申请账号
         </el-button>
         <el-button size="small" type="info" @click="recallPassword">
@@ -89,28 +95,7 @@ const login = function () {
       </div>
     </div>
   </div>
-  <el-dialog v-model="isShowRegister" title="填写信息">
-    <el-form :model="registerForm">
-      <el-form-item label="姓名" :label-width="formLabelWidth">
-        <el-input v-model="registerForm.name" />
-      </el-form-item>
-      <el-form-item label="手机号码" :label-width="formLabelWidth">
-        <el-input v-model="registerForm.phone" />
-      </el-form-item>
-      <el-form-item label="邮箱" :label-width="formLabelWidth">
-        <el-input v-model="registerForm.email" />
-      </el-form-item>
-      <el-form-item label="身份证号码" :label-width="formLabelWidth">
-        <el-input v-model="registerForm.IDNumber" />
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="isShowRegister = false">Cancel</el-button>
-        <el-button type="primary" @click="sendRegisterRequest">Confirm</el-button>
-      </span>
-    </template>
-  </el-dialog>
+  <registerDialog />
 </template>
 
 <style scoped>

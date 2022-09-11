@@ -15,6 +15,8 @@ declare module '@vue/runtime-core' {
     Main: typeof import('./src/components/Main.vue')['default']
     OptionDialog: typeof import('./src/components/StandsList/optionDialog.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
+    RegisterDialog: typeof import('./src/components/Login/registerDialog.vue')['default']
+    RegisterDIalog: typeof import('./src/components/Login/registerDIalog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/StandsList/search.vue')['default']
