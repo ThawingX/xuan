@@ -23,7 +23,7 @@ router.put('/', require('../method/users/update'));
 /* review applied user by id */
 router.post('/review', require('../method/users/reviewAppliedAccount'));
 
-/* review applied user by id */
+/* get appliedList user by id */
 router.get('/review', require('../method/users/getAppliedList'));
 
 /* apply for user */
