@@ -25,20 +25,3 @@ export const $search = async (searchKey = '') => {
     data: { searchKey },
   })
 }
-export const $registerUser = async (searchKey = '') => {
-  return axios ({
-    method: 'post',
-    url: 'http://119.3.243.150:3399/checkStandard',
-    headers: {},
-    data: { searchKey },
-  })
-}
-
-export const $getUserinfo = async (searchKey = '') => {
-  return axios ({
-    method: 'post',
-    url: 'http://119.3.243.150:3399/checkStandard',
-    headers: {},
-    data: { searchKey },
-  })
-}

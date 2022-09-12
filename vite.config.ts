@@ -15,7 +15,14 @@ export default defineConfig({
     Vue(),
 
     // https://github.com/hannoeru/vite-plugin-pages
-    Pages(),
+    Pages({
+      dirs: [{ dir: 'src/pages', baseRoute: '/' }],
+      importMode: 'async',
+      extendRoute(route) {
+        if (route.path === '/')
+          return { ...route, redirect: '/login' }
+      },
+    }),
 
     // https://github.com/antfu/vite-plugin-components
     Components({

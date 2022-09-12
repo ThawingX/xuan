@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
-import { $apply } from '../../composables/http/login.ts'
+import { $reacallPwd } from '../../composables/http/login.ts'
 import { useLoginPageStore } from '~/stores/login/loginPage'
 import { useRegisterFormStore } from '~/stores/login/registerFormtss'
 const loginPageStore = useLoginPageStore()
 const registerFormStore = useRegisterFormStore()
 
-const sendRegisterRequest = function () {
-  registerFormStore.type = 'apply'
-  $apply(registerFormStore)
+const sendRecallPwdRequest = function () {
+  registerFormStore.type = 'recall'
+  $reacallPwd(registerFormStore)
     .then((res) => {
       const { code, message, result } = res.data
       console.log(res.data)
@@ -17,7 +17,7 @@ const sendRegisterRequest = function () {
           message,
           type: 'success',
         })
-        loginPageStore.isShowRegisterForm = false
+        loginPageStore.isShowRecallPwdForm = false
       }
       else {
         ElMessage({
@@ -33,7 +33,7 @@ const sendRegisterRequest = function () {
 </script>
 
 <template>
-  <el-dialog v-model="loginPageStore.isShowRegisterForm" title="申请账号">
+  <el-dialog v-model="loginPageStore.isShowRecallPwdForm" title="找回密码">
     <el-form :model="registerFormStore">
       <el-form-item label="姓名" label-width="10rem">
         <el-input v-model="registerFormStore.name" />
@@ -50,8 +50,8 @@ const sendRegisterRequest = function () {
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="loginPageStore.isShowRegisterForm = false">取消</el-button>
-        <el-button type="primary" @click="sendRegisterRequest">确定</el-button>
+        <el-button @click="loginPageStore.isShowRecallPwdForm = false">取消</el-button>
+        <el-button type="primary" @click="sendRecallPwdRequest">确定</el-button>
       </span>
     </template>
   </el-dialog>

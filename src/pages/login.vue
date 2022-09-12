@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import { useLoginFormStore } from '~/stores/login/loginForm'
-import { useRegisterFormStore } from '~/stores/login/registerForm'
+import { useRegisterFormStore } from '~/stores/login/registerFormtss'
 import { useLoginPageStore } from '~/stores/login/loginPage'
+import { $login } from '~/composables/http/login'
 const router = useRouter()
 const LoginFormStore = useLoginFormStore()
 const registerFormStore = useRegisterFormStore()
@@ -19,29 +19,17 @@ const openRegisterBox = function () {
       type: 'warning',
     },
   )
-    .then(() => {
+    .then((res) => {
       registerFormStore.$reset()
       loginPageStore.isShowRegisterForm = true
     })
-    .catch(() => {
-      ElMessage({
-        type: 'info',
-        message: '打开失败，请稍后重试',
-      })
+    .catch((err) => {
+      console.log(err)
     })
 }
-
-const sendRegisterRequest = function () {
-  ElNotification({
-    title: '成功',
-    message: '申请成功，请等待管理员审核',
-    type: 'success',
-  })
-  loginPageStore.isShowRegisterForm = false
-}
-const recallPassword = function () {
+const openRecallPwdBox = function () {
   ElMessageBox.confirm(
-    '是否联系管理员，获取密码？',
+    '是否联系管理员，找回密码？',
     '警告',
     {
       confirmButtonText: '确定',
@@ -49,23 +37,35 @@ const recallPassword = function () {
       type: 'warning',
     },
   )
-    .then(() => {
-      ElNotification({
-        title: '成功',
-        message: '请稍后查看邮箱或手机',
-        type: 'success',
-      })
+    .then((res) => {
+      registerFormStore.$reset()
+      loginPageStore.isShowRecallPwdForm = true
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
     })
 }
+
 const login = function () {
-  //  发请求
-  ElMessage({
-    message: '登录成功',
-    type: 'success',
-  })
-  router.push('/')
+  $login(LoginFormStore)
+    .then((res) => {
+      const { code, message, result } = res.data
+      if (code) {
+        // document.cookie = `token=${result.token}`
+        window.localStorage.setItem('account', result.account)
+        if (window.localStorage.getItem('account')) {
+          ElMessage.success(message)
+          router.push('/menus')
+        } else {
+          ElMessage.error('请重试')
+        }
+      } else {
+        ElMessage.error(message)
+      }
+    })
+    .catch((err) => {
+      ElMessage.error('失败，请检查网络或其他')
+    })
 }
 </script>
 
@@ -78,7 +78,7 @@ const login = function () {
             <el-input v-model="LoginFormStore.account" />
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="LoginFormStore.password" />
+            <el-input type="password" v-model="LoginFormStore.password" />
           </el-form-item>
         </el-form>
       </div>
@@ -86,7 +86,7 @@ const login = function () {
         <el-button size="small" type="warning" @click="openRegisterBox">
           申请账号
         </el-button>
-        <el-button size="small" type="info" @click="recallPassword">
+        <el-button size="small" type="info" @click="openRecallPwdBox">
           找回密码
         </el-button>
         <el-button size="small" type="primary" @click="login">
@@ -96,6 +96,7 @@ const login = function () {
     </div>
   </div>
   <registerDialog />
+  <recallPwdDialog />
 </template>
 
 <style scoped>

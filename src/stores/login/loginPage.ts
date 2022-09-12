@@ -3,6 +3,7 @@ export const useLoginPageStore = defineStore('loginPage', {
   state: () => {
     return {
       isShowRegisterForm: false,
+      isShowRecallPwdForm: false,
     }
   },
   getters: {
