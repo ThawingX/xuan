@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import { ElNotification } from 'element-plus'
 import { useUserStore } from '~/stores/user'
 import { $allowApply, $rejectApply } from '~/composables/http/user'
 const userStore = useUserStore()
@@ -18,13 +19,45 @@ const tableRowClassName = function ({ row }) {
   return ''
 }
 const allowApply = async function (row: any) {
-  const res = await $allowApply(row)
-  console.log(res)
+  const { data } = await $allowApply(row)
+  const { code, message, result } = data
+  if (code) {
+    ElNotification({
+      title: '成功',
+      message,
+      type: 'success',
+    })
+  }
+  else {
+    ElNotification({
+      title: '失败',
+      message,
+      type: 'error',
+    })
+  }
+  const res = await userStore.getAppliedList()
 }
 
-const rejectApply = function (row: any) {
-  console.log(row)
+const rejectApply = async function (row: any) {
+  const { data } = await $rejectApply(row)
+  const { code, message, result } = data
+  if (code) {
+    ElNotification({
+      title: '成功',
+      message,
+      type: 'success',
+    })
+  }
+  else {
+    ElNotification({
+      title: '失败',
+      message,
+      type: 'error',
+    })
+  }
+  const res = await userStore.getAppliedList()
 }
+
 onMounted(async () => {
   const res = await userStore.getAppliedList()
 })
@@ -40,7 +73,7 @@ onMounted(async () => {
       <el-table-column prop="email" label="邮箱" width="120" />
       <el-table-column prop="role" label="角色" width="120">
         <template #default="scope">
-          <el-select v-model="scope.row.role" placeholder="选择该用户的角色" size="small">
+          <el-select v-if="scope.row.type === 'apply'" v-model="scope.row.role" placeholder="选择该用户的角色" size="small">
             <el-option
               v-for="item in roleList"
               :key="item.value"
@@ -48,6 +81,9 @@ onMounted(async () => {
               :value="item.value"
             />
           </el-select>
+          <div v-else>
+            找回密码
+          </div>
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="审核" width="120">

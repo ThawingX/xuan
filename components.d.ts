@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     AddOptionDialog: typeof import('./src/components/StandsList/addOptionDialog.vue')['default']
     copy: typeof import('./src/components/Login/registerDialog copy.vue')['default']
     DetailStandard: typeof import('./src/components/detailStandard.vue')['default']
+    DropMenu: typeof import('./src/components/Header/dropMenu.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Main: typeof import('./src/components/Main.vue')['default']
