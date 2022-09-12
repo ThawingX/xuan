@@ -6,13 +6,14 @@ module.exports = async function (req, res, next) {
     // 鉴权,管理员 ,通过身份证判断
     // reject 拒绝  allow 通过
     try {
-        const { IDNumber, role, doMethod, type, email } = req.body
+        const { IDNumber, doMethod, type, email } = req.body
         // 判断 找回密码还是申请账号
         if (type === 'recall') {
             // 判断 允许还是拒绝
             if (doMethod === 'allow') {
                 const findRes = await userModel.findOne({ IDNumber })
                 // 发邮箱或短信告诉使用者
+                const delRes = await appliedAccountsModel.deleteOne({IDNumber})
                 return res.json({
                     code: 1,
                     message: `密码已发送至邮箱${email}`,
@@ -20,6 +21,7 @@ module.exports = async function (req, res, next) {
                 })
             }
             if (doMethod === 'reject') {
+                const delRes = await appliedAccountsModel.deleteOne({IDNumber})
                 return res.json({
                     code: 1,
                     message: `拒绝通知已发送至邮箱${email}`,
@@ -46,6 +48,7 @@ module.exports = async function (req, res, next) {
                     // 临时使用，保存密码
                     await userBckModel.create(form)
                     const result = await userModel.create(form)
+                    const delRes = await appliedAccountsModel.deleteOne(IDNumber)
                     return res.json({
                         code: 1,
                         message: "创建成功",
