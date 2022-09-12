@@ -18,6 +18,10 @@ const AppliedAccountsSchema = schema({
         required: true,
         index: { unique: true }
     },
+    type:{
+        type:String,
+        required:true
+    }
 })
 
 const appliedAccountsModel = model('AppliedAccounts', AppliedAccountsSchema)
