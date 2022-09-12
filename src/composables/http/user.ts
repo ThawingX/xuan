@@ -7,3 +7,11 @@ export const $getUserInfo = async (account: String | null = '') => {
     headers: { },
   })
 }
+
+export const $getAppliedList = async () => {
+  return axios({
+    method: 'get',
+    url: 'http://119.3.243.150:3399/user/review',
+    headers: { },
+  })
+}

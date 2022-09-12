@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
-import { $getUserInfo } from '~/composables/http/user'
+import { $getUserInfo,$getAppliedList } from '~/composables/http/user'
 
 const router = useRouter()
 export const useUserStore = defineStore('userStore', {
   state: () => {
     return {
       userInfo: {},
+      appliedList: [],
     }
   },
   getters: {
@@ -22,6 +23,19 @@ export const useUserStore = defineStore('userStore', {
         $getUserInfo(account)
           .then((res) => {
             this.userInfo = res.data.result
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    getAppliedList() {
+      // 鉴权 管理员
+      return new Promise((resolve, reject) => {
+        $getAppliedList()
+          .then((res) => {
+            this.appliedList = res.data.result
             resolve(res)
           })
           .catch((err) => {

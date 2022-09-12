@@ -23,6 +23,10 @@ export const useMainStore = defineStore('main', {
           mName: '检测项录入',
           route: { path: '/menus/testInformationEntry' },
         },
+        {
+          mName: '用户管理',
+          route: { path: '/menus/userManage' },
+        },
       ],
     }
   },
