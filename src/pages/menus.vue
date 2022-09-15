@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { onMounted, h } from 'vue'
-import { useRouter } from 'vue-router'
-import { ElNotification } from 'element-plus'
+// import { onMounted, h } from 'vue'
+// import { useRouter } from 'vue-router'
+// import { ElNotification } from 'element-plus'
 import { useMainStore } from '~/stores'
 const mainStore = useMainStore()
-const router = useRouter()
-const turnToStandardPage = () => {
-  ElNotification({
-    title: '跳转',
-    message: h('i', { style: 'color: teal' }, '自动跳转到标准页，根页面保留使用'),
-  })
-}
-onMounted(() => {
-  turnToStandardPage()
-  router.push('/menus/standardList')
-})
+// const router = useRouter()
+// const turnToStandardPage = () => {
+//   ElNotification({
+//     title: '跳转',
+//     message: h('i', { style: 'color: teal' }, '自动跳转到标准页，根页面保留使用'),
+//   })
+// }
+// onMounted(() => {
+//   turnToStandardPage()
+//   // router.push('/menus/standardList')
+// })
 </script>
 
 <template>

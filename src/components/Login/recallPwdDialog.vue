@@ -2,7 +2,7 @@
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import { $reacallPwd } from '../../composables/http/login.ts'
 import { useLoginPageStore } from '~/stores/login/loginPage'
-import { useRegisterFormStore } from '~/stores/login/registerFormtss'
+import { useRegisterFormStore } from '~/stores/login/registerForm'
 const loginPageStore = useLoginPageStore()
 const registerFormStore = useRegisterFormStore()
 

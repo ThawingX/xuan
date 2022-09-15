@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import { useLoginFormStore } from '~/stores/login/loginForm'
-import { useRegisterFormStore } from '~/stores/login/registerFormtss'
+import { useRegisterFormStore } from '~/stores/login/registerForm'
 import { useLoginPageStore } from '~/stores/login/loginPage'
 import { $login } from '~/composables/http/login'
 const router = useRouter()
@@ -56,10 +56,12 @@ const login = function () {
         if (window.localStorage.getItem('account')) {
           ElMessage.success(message)
           router.push('/menus')
-        } else {
+        }
+        else {
           ElMessage.error('请重试')
         }
-      } else {
+      }
+      else {
         ElMessage.error(message)
       }
     })
@@ -78,7 +80,7 @@ const login = function () {
             <el-input v-model="LoginFormStore.account" />
           </el-form-item>
           <el-form-item label="密码">
-            <el-input type="password" v-model="LoginFormStore.password" />
+            <el-input v-model="LoginFormStore.password" type="password" />
           </el-form-item>
         </el-form>
       </div>

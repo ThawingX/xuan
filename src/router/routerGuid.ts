@@ -11,8 +11,10 @@ export default function registerGuid(router: Router) {
       if (to.fullPath !== '/login')
         return next('/login')
     }
+
     if (to.fullPath === '/login')
       return next('/menus')
+
     if (!userStore.userInfo.length) {
       const res = await userStore.getUserInfo()
       // 如果查询不到当前用户信息，说明系统出错，直接返回到登录页面，之后做逻辑修改
@@ -21,7 +23,6 @@ export default function registerGuid(router: Router) {
         return next('/login')
       }
     }
-
     return next()
   })
 }

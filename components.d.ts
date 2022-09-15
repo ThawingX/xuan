@@ -9,9 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AddDetectItemDialog: typeof import('./src/components/DetectItem/addDetectItemDialog.vue')['default']
     AddOptionDialog: typeof import('./src/components/StandsList/addOptionDialog.vue')['default']
-    copy: typeof import('./src/components/Login/registerDialog copy.vue')['default']
     DetailStandard: typeof import('./src/components/detailStandard.vue')['default']
-    DropMenu: typeof import('./src/components/Header/dropMenu.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Main: typeof import('./src/components/Main.vue')['default']
@@ -19,7 +17,6 @@ declare module '@vue/runtime-core' {
     Pagination: typeof import('./src/components/Pagination.vue')['default']
     RecallPwdDialog: typeof import('./src/components/Login/recallPwdDialog.vue')['default']
     RegisterDialog: typeof import('./src/components/Login/registerDialog.vue')['default']
-    RegisterDIalog: typeof import('./src/components/Login/registerDIalog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/StandsList/search.vue')['default']
