@@ -4,6 +4,7 @@ const { userModel } = require('../../schema/users')
 module.exports = async function (req, res, next) {
     try {
         const form = req.body
+        console.log(form)
         const { IDNumber, type } = form
         if (!IDNumber || type !== "apply") {
             return res.json({

@@ -13,7 +13,7 @@ module.exports = async function (req, res, next) {
             if (doMethod === 'allow') {
                 const findRes = await userModel.findOne({ IDNumber })
                 // 发邮箱或短信告诉使用者
-                const delRes = await appliedAccountsModel.deleteOne({IDNumber})
+                const delRes = await appliedAccountsModel.deleteOne({ IDNumber })
                 return res.json({
                     code: 1,
                     message: `密码已发送至邮箱${email}`,
@@ -21,7 +21,7 @@ module.exports = async function (req, res, next) {
                 })
             }
             if (doMethod === 'reject') {
-                const delRes = await appliedAccountsModel.deleteOne({IDNumber})
+                const delRes = await appliedAccountsModel.deleteOne({ IDNumber })
                 return res.json({
                     code: 1,
                     message: `拒绝通知已发送至邮箱${email}`,
@@ -46,9 +46,14 @@ module.exports = async function (req, res, next) {
                     const lastFourId = form.IDNumber.slice(-4)
                     form["password"] = `${stringRandom(3, { numbers: false })}-${lastFourId}`
                     // 临时使用，保存密码
-                    await userBckModel.create(form)
+                    if (!await userBckModel.findOne({ IDNumber })) {
+                        const delRes = await userBckModel.deleteOne({ IDNumber })
+                        if (delRes) {
+                            await userBckModel.create(form)
+                        }
+                    }
                     const result = await userModel.create(form)
-                    const delRes = await appliedAccountsModel.deleteOne(IDNumber)
+                    const delRes = await appliedAccountsModel.deleteOne({ IDNumber })
                     return res.json({
                         code: 1,
                         message: "创建成功",

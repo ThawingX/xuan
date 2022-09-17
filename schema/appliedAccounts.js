@@ -21,6 +21,9 @@ const AppliedAccountsSchema = schema({
     type:{
         type:String,
         required:true
+    },
+    typeName:{
+        type:String,
     }
 })
 
