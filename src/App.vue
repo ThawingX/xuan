@@ -7,7 +7,7 @@ const router = useRouter()
 onMounted(() => {
   const oldRoute = JSON.parse(window.sessionStorage.getItem('route'))
   if (oldRoute)
-    router.push(oldRoute)
+    router.replace(oldRoute)
 })
 
 watch(route, (newVal, oldVal) => {
@@ -50,9 +50,9 @@ watch(route, (newVal, oldVal) => {
 </template>
 
 <style scoped>
-  .appContainer{
+  /* .appContainer{
+    background-color: var(--bg-blue-shallow);
     width:100vw;
     height:100vh;
-    overflow:hidden;
-  }
+  } */
 </style>

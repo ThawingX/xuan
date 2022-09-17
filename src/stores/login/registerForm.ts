@@ -6,7 +6,8 @@ export const useRegisterFormStore = defineStore('registerForm', {
       phone: '',
       email: '',
       IDNumber: '',
-      type: ''
+      type: '',
+      typeName: '',
     }
   },
   getters: {

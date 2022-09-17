@@ -11,13 +11,20 @@ const backToLogin = function () {
   <!-- <button border @click="backToLogin">back-to-login</button> -->
   <main>
     <StandsList />
-    <Pagination />
+    <Pagination class="bottom" />
   </main>
 </template>
 
 <style scoped>
 main {
   width:100%;
-  margin:1rem ;
+  margin:1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+}
+.bottom{
+  margin-top: auto;
 }
 </style>

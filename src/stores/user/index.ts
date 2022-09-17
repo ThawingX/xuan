@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
-import { $getUserInfo,$getAppliedList } from '~/composables/http/user'
+import { $getAppliedList, $getUserInfo } from '~/composables/http/user'
 
 const router = useRouter()
 export const useUserStore = defineStore('userStore', {
@@ -11,6 +11,9 @@ export const useUserStore = defineStore('userStore', {
     }
   },
   getters: {
+    account: () => {
+      return window.localStorage.getItem('account') || ''
+    },
   },
   actions: {
     getUserInfo() {

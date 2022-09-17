@@ -18,8 +18,8 @@ const router = createRouter({
   routes,
 })
 const app = createApp(App)
-app.use(pinia)
 
+app.use(pinia)
 // 将路由守卫注册到路由中, 在路由守卫中使用了pinia，所以放在pinia之后
 registerGuid(router)
 app.use(router)

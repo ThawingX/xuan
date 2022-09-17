@@ -55,7 +55,7 @@ const login = function () {
         window.localStorage.setItem('account', result.account)
         if (window.localStorage.getItem('account')) {
           ElMessage.success(message)
-          router.push('/menus')
+          router.go('/menus')
         }
         else {
           ElMessage.error('请重试')

@@ -7,14 +7,14 @@ export const useMainStore = defineStore('main', {
           mName: '标准',
           route: { path: '/menus/standardList' },
         },
-        {
-          mName: '产品检测',
-          route: { path: '/menus/product' },
-        },
-        {
-          mName: '仪器设备',
-          route: { path: '/menus/equipment' },
-        },
+        // {
+        //   mName: '产品检测',
+        //   route: { path: '/menus/product' },
+        // },
+        // {
+        //   mName: '仪器设备',
+        //   route: { path: '/menus/equipment' },
+        // },
         {
           mName: '标准录入',
           route: { path: '/menus/standardEntry' },

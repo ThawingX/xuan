@@ -7,6 +7,7 @@ const loginPageStore = useLoginPageStore()
 const registerFormStore = useRegisterFormStore()
 
 const sendRecallPwdRequest = function () {
+  registerFormStore.typeName = '找回密码'
   registerFormStore.type = 'recall'
   $reacallPwd(registerFormStore)
     .then((res) => {

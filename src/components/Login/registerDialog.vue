@@ -7,11 +7,11 @@ const loginPageStore = useLoginPageStore()
 const registerFormStore = useRegisterFormStore()
 
 const sendRegisterRequest = function () {
+  registerFormStore.typeName = '申请账号'
   registerFormStore.type = 'apply'
   $apply(registerFormStore)
     .then((res) => {
       const { code, message, result } = res.data
-      console.log(res.data)
       if (code) {
         ElMessage({
           message,
