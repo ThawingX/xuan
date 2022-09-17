@@ -101,9 +101,19 @@ const standardRules = reactive<FormRules>({
 </script>
 
 <template>
-  <main flex justify-center items-center pt5>
+  <main flex justify-center items-start pt5>
     <div class="container">
       <el-form ref="ruleFormRef" :rules="standardRules" status-icon size="large" :model="standardFormStore.StandardForm" label-width="10rem">
+        <div class="topForm" flex justify-center items-center>
+          <el-radio-group v-model="standardFormStore.StandardForm.standardType">
+            <el-radio-button label="国家标准" size="large" />
+            <el-radio-button label="行业标准" size="large" />
+            <el-radio-button label="地方标准" size="large" />
+            <el-radio-button label="团体标准" size="large" />
+            <el-radio-button label="国际标准" size="large" />
+            <el-radio-button label="企业标准" size="large" />
+          </el-radio-group>
+        </div>
         <div class="inlineContainer" m6 flex justify-center items-start>
           <div class="left">
             <el-form-item label="标准号" prop="id">
@@ -144,13 +154,25 @@ const standardRules = reactive<FormRules>({
               />
             </el-form-item>
             <el-form-item label="归口单位" prop="administrativeDepartment">
-              <el-input v-model="standardFormStore.StandardForm.administrativeDepartment" @click="handleOption('administrativeDepartment')" />
+              <el-input v-model="standardFormStore.StandardForm.administrativeDepartment">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('administrativeDepartment')">Pick</span>
+                </template>
+              </el-input>
             </el-form-item>
             <el-form-item label="主管单位">
-              <el-input v-model="standardFormStore.StandardForm.responsibleDepartment" @click="handleOption('responsibleDepartment')" />
+              <el-input v-model="standardFormStore.StandardForm.responsibleDepartment">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('responsibleDepartment')">Pick</span>
+                </template>
+              </el-input>
             </el-form-item>
             <el-form-item label="发布单位" prop="releaseDepartment">
-              <el-input v-model="standardFormStore.StandardForm.releaseDepartment" @click="handleOption('releaseDepartment')" />
+              <el-input v-model="standardFormStore.StandardForm.releaseDepartment">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('releaseDepartment')">Pick</span>
+                </template>
+              </el-input>
             </el-form-item>
           </div>
           <div class="right">
@@ -170,32 +192,32 @@ const standardRules = reactive<FormRules>({
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="标准类型" prop="standardType">
-              <el-select v-model="standardFormStore.StandardForm.standardType" placeholder="请选择标准的类型">
+            <el-form-item label="区域/地方" prop="city">
+              <el-select v-model="standardFormStore.StandardForm.city" placeholder="请选择区域">
                 <el-option
-                  v-for="row of standardStore.typeLists" :key="row.mName" :label="row.mName"
-                  :value="row.requestKey"
+                  v-for="row of standardStore.cites" :key="row.cityCode" :label="row.cityName"
+                  :value="row.cityCode"
                 />
               </el-select>
             </el-form-item>
             <el-form-item label="行业分类" prop="industryClassfication">
-              <el-input v-model="standardFormStore.StandardForm.industryClassfication" @click="handleOption('industryClassfication')" />
+              <el-input v-model="standardFormStore.StandardForm.industryClassfication">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('industryClassfication')">Pick</span>
+                </template>
+              </el-input>
             </el-form-item>
             <el-form-item label="ICS分类" prop="ICSClassfication">
-              <el-input v-model="standardFormStore.StandardForm.ICSClassfication" @click="handleOption('ICSClassfication')" />
+              <el-input v-model="standardFormStore.StandardForm.ICSClassfication">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('ICSClassfication')">Pick</span>
+                </template>
+              </el-input>
             </el-form-item>
           </div>
         </div>
         <div class="bottomForm" flex justify-start items-start>
-          <el-form-item label="区域/地方" prop="city">
-            <el-select v-model="standardFormStore.StandardForm.city" placeholder="请选择区域">
-              <el-option
-                v-for="row of standardStore.cites" :key="row.cityCode" :label="row.cityName"
-                :value="row.cityCode"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="备注" flex-1>
+          <el-form-item label="备注" flex-1 mr8>
             <el-input v-model="standardFormStore.StandardForm.comment" type="textarea" />
           </el-form-item>
         </div>

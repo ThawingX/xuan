@@ -44,7 +44,9 @@ const handleOpen = function () {
 const addBtn = async function () {
   const res = await addSubOption()
   const res2 = await handleOpen()
-  console.log(optionStore.optionList)
+  standardFormStore.isShowAddOptionDialog = false
+}
+const close = function () {
   standardFormStore.isShowAddOptionDialog = false
 }
 </script>
@@ -52,15 +54,19 @@ const addBtn = async function () {
 <template>
   <el-dialog
     v-model="standardFormStore.isShowAddOptionDialog"
-    title="子项名称"
+    title="添加子项"
     width="30%"
     :draggable="true"
     :close-on-click-modal="false"
+    :show-close="false"
   >
     <el-input v-model="optionStore.subOption.subOptionName " />
     <!-- 确定按钮 -->
     <div class="bottom">
-      <el-button type="primary" @click="addBtn()">
+      <el-button type="primary" @click="close()">
+        取消
+      </el-button>
+      <el-button type="warning" @click="addBtn()">
         确定
       </el-button>
     </div>
@@ -68,5 +74,9 @@ const addBtn = async function () {
 </template>
 
 <style scoped>
-
+.bottom{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
 </style>

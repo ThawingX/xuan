@@ -64,16 +64,27 @@ const showAddOptionDialog = function () {
 const closeOptionDialog = function () {
   standardFormStore.isShowOptionDialog = false
 }
+const getTitle = function (val: String) {
+  const list = {
+    ICSClassfication: 'ICS分类',
+    industryClassfication: '行业分类',
+    releaseDepartment: '发布单位',
+    responsibleDepartment: '主管单位',
+    administrativeDepartment: '归口单位',
+  }
+  return list[val]
+}
 </script>
 
 <template>
   <el-dialog
     v-model="standardFormStore.isShowOptionDialog"
-    :title="optionStore.subOption.optionName"
+    :title="getTitle(optionStore.subOption.optionName)"
     width="50%"
     :before-close="handleClose"
     :draggable="true"
     :close-on-click-modal="false"
+    :show-close="false"
     @open="getOptionLIst"
   >
     <!--  table显示，内含删除按钮 -->
@@ -91,11 +102,11 @@ const closeOptionDialog = function () {
     </div>
     <!--  添加 和 确定按钮 -->
     <div class="bottom">
-      <el-button type="warning" @click="showAddOptionDialog">
-        添加
-      </el-button>
       <el-button type="primary" @click="closeOptionDialog()">
         关闭
+      </el-button>
+      <el-button type="warning" @click="showAddOptionDialog">
+        添加
       </el-button>
     </div>
   </el-dialog>
@@ -103,5 +114,9 @@ const closeOptionDialog = function () {
 </template>
 
 <style scoped>
-
+.bottom{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
 </style>
