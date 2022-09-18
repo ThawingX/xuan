@@ -20,6 +20,15 @@ router.delete('/', require('../method/standards/delete'));
 /* update standards by id. */
 router.put('/', require('../method/standards/update'));
 
+
+/* add relation. */
+router.post('/relation', require('../method/standards/relation'));
+
+/* get relation by id. */
+router.get('/relation', require('../method/standards/getRelation'));
+
+
+
 /* get standards list. */
 router.get('/list', require('../method/standards/getList'));
 
