@@ -39,7 +39,7 @@ const StandardSchema = schema({
     responsibleDepartment: {
         type: String
     },
-    releaseDepartment: {
+    replaceStandard: {
         type: String
     },
     comment: {
@@ -49,9 +49,6 @@ const StandardSchema = schema({
         type: String
     },
     industryClassfication: {
-        type: String
-    },
-    ICSClassfication: {
         type: String
     },
     implementationTime: {
