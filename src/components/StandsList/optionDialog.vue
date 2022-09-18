@@ -71,8 +71,9 @@ const getTitle = function (val: String) {
     releaseDepartment: '发布单位',
     responsibleDepartment: '主管单位',
     administrativeDepartment: '归口单位',
+    replaceStandard: '替代标准',
   }
-  return list[val]
+  return list[val] || val
 }
 </script>
 

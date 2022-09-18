@@ -5,8 +5,22 @@ const standardStore = useStandardStore()
 const handleKey = async (row: any) => {
   standardStore.standardLists = []
   const res = await $getStandard(row.requestKey)
-  console.log(res)
   standardStore.standardLists = res.data.data
+}
+const keyOptions = {
+  standardType: {
+    title: '标准类型',
+    key: 'standardType',
+    requestKey: 'standardType',
+    options: [
+      { label: '国家标准', value: '国家标准' },
+      { label: '行业标准', value: '行业标准' },
+      { label: '企业标准', value: '企业标准' },
+      { label: '地方标准', value: '地方标准' },
+      { label: '军事标准', value: '军事标准' },
+      { label: '其他标准', value: '其他标准' },
+    ],
+  },
 }
 </script>
 
@@ -22,10 +36,11 @@ const handleKey = async (row: any) => {
     <div class="keyMatchContainer">
       <div class="standardType" flex justify-start items-center gap-2>
         <div class="label" w20>
-          标准类型
+          {{ keyOptions.standardType.title }}
         </div>
-        <button v-for="row of standardStore.typeLists" :key="row.mName" class="option" @click="handleKey(row)">
-          {{ row.mName }}
+        <!-- <el-checkbox v-model="checked1" :label="row.mName" size="small" /> -->
+        <button v-for="row of keyOptions.standardType.options" :key="row.value" class="option" @click="handleKey(row)">
+          {{ row.label }}
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>
@@ -33,7 +48,7 @@ const handleKey = async (row: any) => {
           标准性质
         </div>
         <button v-for="row of standardStore.propertyLists" :key="row.mName" class="option" @click="handleKey(row)">
-          {{ row.mName }}
+          {{ }}
         </button>
       </div>
       <div class="standardType" flex justify-start items-center gap-2>

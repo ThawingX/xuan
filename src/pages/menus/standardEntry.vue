@@ -7,19 +7,12 @@ import { $submit } from '~/composables/http'
 import { useStandardFormStore } from '~/stores/standard/standardForm'
 import { useStandardStore } from '~/stores/standard'
 import { useOptionStore } from '~/stores/standard/subOption'
+import { useOptionNameStore } from '~/stores/standard/optionName'
 const upload = ref<UploadInstance>()
 const standardFormStore = useStandardFormStore()
 const standardStore = useStandardStore()
 const optionStore = useOptionStore()
-const handleExceed: UploadProps['onExceed'] = (files) => {
-  upload.value!.clearFiles()
-  const file = files[0] as UploadRawFile
-  file.uid = genFileId()
-  upload.value!.handleStart(file)
-}
-const submitUpload = () => {
-  upload.value!.submit()
-}
+const optionNameStore = useOptionNameStore()
 
 const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
   if (!ruleFormRef)
@@ -110,13 +103,13 @@ const standardRules = reactive<FormRules>({
             <el-radio-button label="行业标准" size="large" />
             <el-radio-button label="地方标准" size="large" />
             <el-radio-button label="团体标准" size="large" />
-            <el-radio-button label="国际标准" size="large" />
             <el-radio-button label="企业标准" size="large" />
+            <el-radio-button label="国际标准" size="large" />
           </el-radio-group>
         </div>
         <div class="inlineContainer" m6 flex justify-center items-start>
           <div class="left">
-            <el-form-item label="标准号" prop="id">
+            <el-form-item :label="optionNameStore.id.name" prop="id">
               <el-tooltip placement="top-start">
                 <template #content>
                   可能的格式：<br>
@@ -127,56 +120,7 @@ const standardRules = reactive<FormRules>({
                 <el-input v-model="standardFormStore.StandardForm.id" />
               </el-tooltip>
             </el-form-item>
-            <el-form-item label="中文标准名称" prop="chName">
-              <el-input v-model="standardFormStore.StandardForm.chName" />
-            </el-form-item>
-            <el-form-item label="英文标准名称" prop="enName">
-              <el-input v-model="standardFormStore.StandardForm.enName" />
-            </el-form-item>
-            <el-form-item label="中文标准分类号">
-              <el-input v-model="standardFormStore.StandardForm.CCS" />
-            </el-form-item>
-            <el-form-item label="英文标准分类号">
-              <el-input v-model="standardFormStore.StandardForm.ICS" />
-            </el-form-item>
-          </div>
-          <div class="middle">
-            <el-form-item label="发布日期" prop="releaseTime">
-              <el-date-picker
-                v-model="standardFormStore.StandardForm.releaseTime" :clearable="false" type="date"
-                placeholder="选择日期" style="width: 100%"
-              />
-            </el-form-item>
-            <el-form-item label="实施日期" prop="implementationTime">
-              <el-date-picker
-                v-model="standardFormStore.StandardForm.implementationTime" :clearable="false" type="date"
-                placeholder="选择日期" style="width: 100%"
-              />
-            </el-form-item>
-            <el-form-item label="归口单位" prop="administrativeDepartment">
-              <el-input v-model="standardFormStore.StandardForm.administrativeDepartment">
-                <template #prepend>
-                  <span cursor-pointer @click="handleOption('administrativeDepartment')">Pick</span>
-                </template>
-              </el-input>
-            </el-form-item>
-            <el-form-item label="主管单位">
-              <el-input v-model="standardFormStore.StandardForm.responsibleDepartment">
-                <template #prepend>
-                  <span cursor-pointer @click="handleOption('responsibleDepartment')">Pick</span>
-                </template>
-              </el-input>
-            </el-form-item>
-            <el-form-item label="发布单位" prop="releaseDepartment">
-              <el-input v-model="standardFormStore.StandardForm.releaseDepartment">
-                <template #prepend>
-                  <span cursor-pointer @click="handleOption('releaseDepartment')">Pick</span>
-                </template>
-              </el-input>
-            </el-form-item>
-          </div>
-          <div class="right">
-            <el-form-item label="标准状态" prop="state">
+            <el-form-item v-if="optionNameStore.state.isShow" :label="optionNameStore.state.name" prop="state">
               <el-select v-model="standardFormStore.StandardForm.state" placeholder="请选择标准的状态">
                 <el-option
                   v-for="row of standardStore.stateLists" :key="row.mName" :label="row.mName"
@@ -184,7 +128,7 @@ const standardRules = reactive<FormRules>({
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="标准性质" prop="property">
+            <el-form-item v-if="optionNameStore.property.isShow" :label="optionNameStore.property.name" prop="property">
               <el-select v-model="standardFormStore.StandardForm.property" placeholder="请选择标准的性质">
                 <el-option
                   v-for="row of standardStore.propertyLists" :key="row.mName" :label="row.mName"
@@ -192,7 +136,64 @@ const standardRules = reactive<FormRules>({
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="区域/地方" prop="city">
+            <el-form-item v-if="optionNameStore.sort.isShow" :label="optionNameStore.sort.name" prop="sort">
+              <el-select v-model="standardFormStore.StandardForm.sort" placeholder="请选择标准的性质">
+                <el-option
+                  v-for="row of standardStore.sortLists" :key="row.mName" :label="row.mName"
+                  :value="row.requestKey"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item :label="optionNameStore.releaseTime.name" prop="releaseTime">
+              <el-date-picker
+                v-model="standardFormStore.StandardForm.releaseTime" :clearable="false" type="date"
+                placeholder="选择日期" style="width: 100%"
+              />
+            </el-form-item>
+            <el-form-item :label="optionNameStore.implementationTime.name" prop="implementationTime">
+              <el-date-picker
+                v-model="standardFormStore.StandardForm.implementationTime" :clearable="false" type="date"
+                placeholder="选择日期" style="width: 100%"
+              />
+            </el-form-item>
+          </div>
+          <div class="middle">
+            <el-form-item v-if="optionNameStore.chName.isShow" :label="optionNameStore.chName.name" prop="chName">
+              <el-input v-model="standardFormStore.StandardForm.chName" />
+            </el-form-item>
+            <el-form-item :label="optionNameStore.enName.name" prop="enName">
+              <el-input v-model="standardFormStore.StandardForm.enName" />
+            </el-form-item>
+            <el-form-item v-if="optionNameStore.CCS.isShow" :label="optionNameStore.CCS.name">
+              <el-input v-model="standardFormStore.StandardForm.CCS" />
+            </el-form-item>
+            <el-form-item v-if="optionNameStore.ICS.isShow" :label="optionNameStore.ICS.name">
+              <el-input v-model="standardFormStore.StandardForm.ICS" />
+            </el-form-item>
+            <el-form-item v-if="optionNameStore.administrativeDepartment.isShow" :label="optionNameStore.administrativeDepartment.name" prop="administrativeDepartment">
+              <el-input v-model="standardFormStore.StandardForm.administrativeDepartment">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('administrativeDepartment')">Pick</span>
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item v-if="optionNameStore.responsibleDepartment.isShow" :label="optionNameStore.responsibleDepartment.name">
+              <el-input v-model="standardFormStore.StandardForm.responsibleDepartment">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('responsibleDepartment')">Pick</span>
+                </template>
+              </el-input>
+            </el-form-item>
+          </div>
+          <div class="right">
+            <el-form-item v-if="optionNameStore.replaceStandard.isShow" :label="optionNameStore.replaceStandard.name" prop="replaceStandard">
+              <el-input v-model="standardFormStore.StandardForm.replaceStandard">
+                <template #prepend>
+                  <span cursor-pointer @click="handleOption('replaceStandard')">Pick</span>
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item v-if="optionNameStore.city.isShow" :label="optionNameStore.city.name" prop="city">
               <el-select v-model="standardFormStore.StandardForm.city" placeholder="请选择区域">
                 <el-option
                   v-for="row of standardStore.cites" :key="row.cityCode" :label="row.cityName"
@@ -200,17 +201,10 @@ const standardRules = reactive<FormRules>({
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="行业分类" prop="industryClassfication">
+            <el-form-item v-if="optionNameStore.industryClassfication.isShow" :label="optionNameStore.industryClassfication.name" prop="industryClassfication">
               <el-input v-model="standardFormStore.StandardForm.industryClassfication">
                 <template #prepend>
                   <span cursor-pointer @click="handleOption('industryClassfication')">Pick</span>
-                </template>
-              </el-input>
-            </el-form-item>
-            <el-form-item label="ICS分类" prop="ICSClassfication">
-              <el-input v-model="standardFormStore.StandardForm.ICSClassfication">
-                <template #prepend>
-                  <span cursor-pointer @click="handleOption('ICSClassfication')">Pick</span>
                 </template>
               </el-input>
             </el-form-item>
@@ -226,19 +220,6 @@ const standardRules = reactive<FormRules>({
         <el-button inline-block right-0 color-black type="success" @click="onSubmit(ruleFormRef)">
           submit
         </el-button>
-        <!-- <el-upload
-          ref="upload" :data="{ ...standardFormStore.StandardForm }" mt-2 self-center class="upload"
-          action="http://119.3.243.150:3300/uploadFile" :limit="1" :on-exceed="handleExceed" :auto-upload="false"
-        >
-          <template #trigger>
-            <el-button color-black type="primary">
-              选择源标准
-            </el-button>
-          </template>
-          <el-button color-black class="ml-3" type="success" @click="submitUpload">
-            上传标准文件
-          </el-button>
-        </el-upload> -->
       </div>
     </div>
     <optionDialog />

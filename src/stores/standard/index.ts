@@ -48,6 +48,40 @@ export const useStandardStore = defineStore('standard', {
           requestKey: 'mandatory',
         },
       ],
+      sortLists: [
+        {
+          mName: '产品',
+          requestKey: 'product',
+        },
+        {
+          mName: '基础',
+          requestKey: 'basis',
+        },
+        {
+          mName: '方法',
+          requestKey: 'method',
+        },
+        {
+          mName: '管理',
+          requestKey: 'manager',
+        },
+        {
+          mName: '安全',
+          requestKey: 'safety',
+        },
+        {
+          mName: '卫生',
+          requestKey: 'health',
+        },
+        {
+          mName: '环保',
+          requestKey: 'environment',
+        },
+        {
+          mName: '其他',
+          requestKey: 'other',
+        },
+      ],
       stateLists: [
         {
           mName: '即将实施',
