@@ -12,7 +12,7 @@ function turnToDetail(row: any) {
   router.push({ name: 'detail', params: { ...row } })
 }
 const getTrimTime = function (time: string) {
-  return time.slice(0, 7)
+  return time.slice(0, 10)
 }
 const getTypeClass = function (type: string) {
   const classes = ['type']

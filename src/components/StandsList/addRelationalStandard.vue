@@ -1,26 +1,13 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import type { VNode, VNodeProps } from 'vue'
 import { useRelationalStandardStore } from '~/stores/standard/relationalStandard'
 import { useStandardStore } from '~/stores/standard'
-import { $getStandard } from '~/composables/http'
+import { $addRelation, $getStandard } from '~/composables/http'
 const relationalStandardStore = useRelationalStandardStore()
 const standardStore = useStandardStore()
-interface Option {
-  key: number
-  label: string
-  disabled: boolean
-}
 
 const rightValue = ref([1])
 const leftValue = ref([1])
-
-const renderFunc = (
-  h: (type: string, props: VNodeProps | null, children?: string) => VNode,
-  option: Option,
-) => {
-  return h('span', null, option.label)
-}
 
 const handleClose = function () {
   relationalStandardStore.isShowRelationalStandardDialog = false
@@ -32,7 +19,9 @@ const getStandardList = async function () {
   standardStore.standardLists = res.data.data
 }
 const addRelationalStandard = async function () {
-  console.log(rightValue.value)
+  const currTime = new Date()
+  const res = await $addRelation({ id: relationalStandardStore.standardId, subStandards: rightValue.value, time: currTime })
+  console.log(res)
 }
 onMounted(async () => {
   await getStandardList()
