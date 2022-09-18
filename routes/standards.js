@@ -5,7 +5,7 @@ const { standardModel } = require('../schema/standards');
 /* get standards by id. */
 router.get('/', require('../method/standards/getById'));
 
-/* get standards by id. */
+/* get standards by key. */
 router.get('/key', require('../method/standards/getByKey'));
 
 /* get standards by search. */
