@@ -7,8 +7,6 @@ const backToLogin = function () {
 </script>
 
 <template>
-  <!-- <standardAside /> -->
-  <!-- <button border @click="backToLogin">back-to-login</button> -->
   <main>
     <StandsList />
     <Pagination class="bottom" />
