@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useMainStore } from '~/stores'
+const router = useRouter()
 const mainStore = useMainStore()
+onMounted(() => {
+  router.replace('/menus/standardlist')
+})
 </script>
 
 <template>

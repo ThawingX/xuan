@@ -19,9 +19,8 @@ export const $getStandard = async () => {
 
 export const $search = async (searchKey = '') => {
   return axios ({
-    method: 'post',
-    url: 'http://119.3.243.150:3399/checkStandard',
+    method: 'get',
+    url: `http://119.3.243.150:3399/standard/key?key=${searchKey}`,
     headers: {},
-    data: { searchKey },
   })
 }

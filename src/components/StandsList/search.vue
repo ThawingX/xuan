@@ -1,17 +1,17 @@
 <script setup lang='ts'>
-import { useMainStore } from '~/stores'
+import { ElMessage } from 'element-plus'
+import { useStandardStore } from '~/stores/standard'
 import { $search } from '~/composables/http'
-const mainStore = useMainStore()
+const standardStore = useStandardStore()
 
 async function search(e: Event) {
   const val = e.target!.value
-  const res = await $search(val)
-  const list = res.data.data
-  console.log(res)
-  if (res.data.data.length === 0)
-    alert('搜索为空')
+  const { data } = await $search(val)
+  const { result, code, message } = data
+  if (code !== 1)
+    ElMessage.error(message)
   else
-    mainStore.standardLists = list
+    standardStore.standardLists = result
 }
 </script>
 
@@ -43,13 +43,12 @@ async function search(e: Event) {
 }
 
 .search::placeholder {
-  color: white;
+  color: transparent;
   font-size: 0.75rem;
 }
 
 .search:hover {
   box-shadow: 0 3px 5px var(--bg-blue);
-  cursor: pointer;
 }
 
 .search:focus~img {
@@ -58,5 +57,9 @@ async function search(e: Event) {
 
 .search:focus{
   width:100%;
+}
+.search:focus::placeholder {
+  opacity: 0;
+  font-size: 0.75rem;
 }
 </style>

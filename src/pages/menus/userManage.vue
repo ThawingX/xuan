@@ -107,7 +107,7 @@ onMounted(async () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .el-table .apply-row {
   --el-table-tr-bg-color: var(--bg-blue);
 }

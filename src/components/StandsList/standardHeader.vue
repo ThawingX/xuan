@@ -15,10 +15,10 @@ const keyOptions = {
     options: [
       { label: '国家标准', value: '国家标准' },
       { label: '行业标准', value: '行业标准' },
-      { label: '企业标准', value: '企业标准' },
       { label: '地方标准', value: '地方标准' },
-      { label: '军事标准', value: '军事标准' },
-      { label: '其他标准', value: '其他标准' },
+      { label: '团体标准', value: '团体标准' },
+      { label: '企业标准', value: '企业标准' },
+      { label: '国际标准', value: '国际标准' },
     ],
   },
 }
@@ -88,6 +88,10 @@ const keyOptions = {
 </template>
 
 <style scoped>
+.container{
+  background-color: #ffffff;
+  padding:0 1rem;
+}
 .title {
   width: 20%;
   color: var(--font-blue);
@@ -103,8 +107,6 @@ const keyOptions = {
 }
 
 .keyMatchContainer {
-  box-shadow: 0 0 0.5px var(--border-gray);
-  margin: 0.25rem;
   padding: 0.5rem;
 }
 

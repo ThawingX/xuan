@@ -7,9 +7,7 @@ const row: any = route.params
 <template>
   <div class="container">
     <div class="detailTable">
-      <keep-alive include="detailStandard">
-        <detailStandard :info="row" />
-      </keep-alive>
+      <detailStandard :info="row" />
     </div>
   </div>
 </template>

@@ -52,44 +52,58 @@ const handleOption = function (val: String) {
   optionStore.subOption.optionName = val
   standardFormStore.isShowOptionDialog = true
 }
+const checkId = function (rule: any, value: any, callback: any) {
+  if (value === '')
+    callback(new Error('不能为空'))
+
+  if (value.match(/^[A-Z\/\.\-]+ [0-9]+$/)) { callback() }
+  else {
+    if (value.match(/[^A-Z\/\.\-0-9]/))
+      callback(new Error('只能输入大写字母、数字、/、.、-'))
+    else
+      callback(new Error('格式错误'))
+  }
+}
+
 const ruleFormRef = ref<FormInstance>()
 const standardRules = reactive<FormRules>({
   id: [
-    { required: true, message: '请输入标准号', trigger: 'blur' },
+    { validator: checkId, trigger: 'blur' },
   ],
   chName: [
-    { required: true, message: '请输入中文标准名称', trigger: 'blur' },
-  ],
-  standardType: [
-    { required: true, message: '请选择标准类型', trigger: 'change' },
+    { required: optionNameStore.chName.isShow, message: '不能为空', trigger: 'blur' },
   ],
   releaseTime: [
-    { required: true, message: '请选择发布日期', trigger: 'blur' },
+    { required: optionNameStore.releaseTime.isShow, message: '不能为空', trigger: 'blur' },
   ],
   implementationTime: [
-    { required: true, message: '请选择发布日期', trigger: 'blur' },
+    { required: optionNameStore.implementationTime.isShow, message: '不能为空', trigger: 'blur' },
   ],
   state: [
-    { required: true, message: '请选择标准状态', trigger: 'change' },
+    { required: optionNameStore.state.isShow, message: '不能为空', trigger: 'change' },
   ],
   property: [
-    { required: true, message: '请选择标准性质', trigger: 'change' },
+    { required: optionNameStore.property.isShow, message: '不能为空', trigger: 'change' },
+  ],
+  sort: [
+    { required: optionNameStore.sort.isShow, message: '不能为空', trigger: 'change' },
   ],
   city: [
-    { required: true, message: '请选择区域', trigger: 'change' },
-  ],
-  industryClassfication: [
-    { required: true, message: '请选择行业', trigger: 'blur' },
-  ],
-  ICSClassfication: [
-    { required: true, message: '请选择ICS', trigger: 'blur' },
+    { required: true, message: '不能为空', trigger: 'change' },
   ],
   administrativeDepartment: [
-    { required: true, message: '请选择归口单位', trigger: 'blur' },
+    { required: optionNameStore.administrativeDepartment.isShow, message: '不能为空', trigger: 'blur' },
   ],
-  releaseDepartment: [
-    { required: true, message: '请选择发布单位', trigger: 'blur' },
+  responsibleDepartment: [
+    { required: optionNameStore.responsibleDepartment.isShow, message: '不能为空', trigger: 'blur' },
   ],
+  industryClassfication: [
+    { required: true, message: '不能为空', trigger: 'blur' },
+  ],
+  ICSClassfication: [
+    { required: true, message: '不能为空', trigger: 'blur' },
+  ],
+
 })
 </script>
 
@@ -109,16 +123,8 @@ const standardRules = reactive<FormRules>({
         </div>
         <div class="inlineContainer" m6 flex justify-center items-start>
           <div class="left">
-            <el-form-item :label="optionNameStore.id.name" prop="id">
-              <el-tooltip placement="top-start">
-                <template #content>
-                  可能的格式：<br>
-                  GB 0000.0 <br>
-                  GB/T 0000.0 <br>
-                  XX 00000
-                </template>
-                <el-input v-model="standardFormStore.StandardForm.id" />
-              </el-tooltip>
+            <el-form-item required :label="optionNameStore.id.name" prop="id">
+              <el-input v-model="standardFormStore.StandardForm.id" />
             </el-form-item>
             <el-form-item v-if="optionNameStore.state.isShow" :label="optionNameStore.state.name" prop="state">
               <el-select v-model="standardFormStore.StandardForm.state" placeholder="请选择标准的状态">
@@ -177,7 +183,7 @@ const standardRules = reactive<FormRules>({
                 </template>
               </el-input>
             </el-form-item>
-            <el-form-item v-if="optionNameStore.responsibleDepartment.isShow" :label="optionNameStore.responsibleDepartment.name">
+            <el-form-item v-if="optionNameStore.responsibleDepartment.isShow" :label="optionNameStore.responsibleDepartment.name" prop="responsibleDepartment">
               <el-input v-model="standardFormStore.StandardForm.responsibleDepartment">
                 <template #prepend>
                   <span cursor-pointer @click="handleOption('responsibleDepartment')">Pick</span>
@@ -227,4 +233,7 @@ const standardRules = reactive<FormRules>({
 </template>
 
 <style scoped>
+.el-form-item__error{
+    width:12rem;
+}
 </style>

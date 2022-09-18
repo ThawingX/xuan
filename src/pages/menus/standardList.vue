@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const backToLogin = function () {
-  router.push('/login')
-}
+
 </script>
 
 <template>
@@ -16,7 +14,7 @@ const backToLogin = function () {
 <style scoped>
 main {
   width:100%;
-  margin:1rem;
+  /* margin:1rem; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;

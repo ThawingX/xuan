@@ -16,7 +16,7 @@ export const useOptionNameStore = defineStore('optionNameStore', {
     },
     id(): OptionNameStore {
       return {
-        name: this.type === '团体标准' ? '团体编号' : '标准号',
+        name: this.type === '团体标准' ? '标准编号' : '标准号',
         isShow: true,
       }
     },
@@ -66,13 +66,13 @@ export const useOptionNameStore = defineStore('optionNameStore', {
     },
     CCS(): OptionNameStore {
       return {
-        name: this.commonFlag ? '中文标准分类号' : '',
+        name: this.commonFlag ? '中国标准分类号' : '',
         isShow: this.commonFlag,
       }
     },
     ICS(): OptionNameStore {
       return {
-        name: this.commonFlag ? '英文标准分类号' : '',
+        name: this.commonFlag ? '国际标准分类号' : '',
         isShow: this.commonFlag,
       }
     },
