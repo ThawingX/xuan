@@ -104,12 +104,12 @@ const login = function () {
 <style scoped>
 .container {
   width: 100%;
-  height: 100%;
+  height: 80vh;
 }
 
 .loginBox {
   width: 40rem;
   height: 20rem;
-  box-shadow: 0 0 3px var(--border-gray-deep)
+  background-color: #fff;
 }
 </style>
