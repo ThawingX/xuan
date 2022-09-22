@@ -21,14 +21,20 @@ const openRelationalStandard = function () {
   relationalStandardStore.standardId = info.value.id
 }
 onMounted(async () => {
+  relationalStandardStore.subStandardList = []
   const { data } = await $getRelation(info.value.id)
   const { code, message, result } = data
   if (code === 1)
     relationalStandardStore.subStandardList = result
 })
-function turnToDetail(row: any) {
-  standardFormStore.StandardForm.standardType = row.standardType
+async function turnToDetail(row: any) {
+  relationalStandardStore.subStandardList = []
   info.value = row
+  const { data } = await $getRelation()
+  const { code, message, result } = data
+  if (code === 1)
+    relationalStandardStore.subStandardList = result
+  standardFormStore.StandardForm.standardType = row.standardType
 }
 </script>
 

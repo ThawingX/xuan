@@ -55,14 +55,14 @@ const handleOption = function (val: String) {
 const checkId = function (rule: any, value: any, callback: any) {
   if (value === '')
     callback(new Error('不能为空'))
-
-  if (value.match(/^[A-Z\/\.\-]+ [0-9]+$/)) { callback() }
-  else {
-    if (value.match(/[^A-Z\/\.\-0-9]/))
-      callback(new Error('只能输入大写字母、数字、/、.、-'))
-    else
-      callback(new Error('格式错误'))
-  }
+  callback()
+  // if (value.match(/^[A-Z\/\.\-]+ [0-9]+$/)) { callback() }
+  // else {
+  //   if (value.match(/[^A-Z\/\.\-0-9]/))
+  //     callback(new Error('只能输入大写字母、数字、/、.、-'))
+  //   else
+  //     callback(new Error('格式错误'))
+  // }
 }
 
 const ruleFormRef = ref<FormInstance>()

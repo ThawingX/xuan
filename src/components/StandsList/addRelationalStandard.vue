@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { ElNotification } from 'element-plus'
 import { useRelationalStandardStore } from '~/stores/standard/relationalStandard'
 import { useStandardStore } from '~/stores/standard'
 import { $addRelation, $getStandard } from '~/composables/http'
@@ -20,9 +21,28 @@ const getStandardList = async function () {
 }
 const addRelationalStandard = async function () {
   const currTime = new Date()
-  const res = await $addRelation({ id: relationalStandardStore.standardId, subStandards: rightValue.value, time: currTime })
-  console.log(res)
+  const { data } = await $addRelation({ id: relationalStandardStore.standardId, subStandards: rightValue.value, time: currTime })
+  const { code, message, result } = data
+  if (code === 1) {
+    ElNotification({
+      title: '成功',
+      message,
+      type: 'success',
+    })
+    relationalStandardStore.isShowRelationalStandardDialog = false
+  }
+  else {
+    ElNotification({
+      title: '失败',
+      message,
+      type: 'error',
+    })
+  }
 }
+// watch(() => relationalStandardStore.isShowRelationalStandardDialog, async (val: any) => {
+//   if (val)
+//     await getStandardList()
+// })
 onMounted(async () => {
   await getStandardList()
 })
@@ -32,7 +52,7 @@ onMounted(async () => {
   <el-dialog
     v-model="relationalStandardStore.isShowRelationalStandardDialog"
     title="添加关联标准"
-    width="100%"
+    width="80%"
     :before-close="handleClose"
   >
     <div style="text-align: center">

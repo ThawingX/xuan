@@ -38,7 +38,7 @@ const deleteUser = function (row: any) {
 
 <template>
   <div class="container">
-    <el-table :data="userStore.userList" style="width: 100%" :row-class-name="tableRowClassName">
+    <el-table border :data="userStore.userList" style="width: 100%" :row-class-name="tableRowClassName">
       <el-table-column prop="account" label="序号" width="100" />
       <el-table-column prop="name" label="姓名" width="80" />
       <el-table-column prop="phone" label="手机" width="120" />

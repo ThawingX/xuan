@@ -65,7 +65,7 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <el-table :data="userStore.appliedList" :row-class-name="tableRowClassName" style="width: 100%">
+    <el-table border :data="userStore.appliedList" :row-class-name="tableRowClassName" style="width: 100%">
       <el-table-column type="index" label="序号" width="60" />
       <el-table-column prop="typeName,type" label="目的" width="100">
         <template #default="scope">

@@ -13,6 +13,7 @@ export const useDetectItemStore = defineStore('detectItem', {
         detectMethod: '',
         equipment: '',
         equipmentRequirement: '',
+        description: '',
       },
       detectItemList: [],
       isShowAddDetectItem: false,

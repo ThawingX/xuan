@@ -58,17 +58,18 @@ const search = function () {
       <el-input v-model="detectItemStore.detectItem.chName" label="中文标准名称" :disabled="true" placeholder="" />
       <el-input v-model="detectItemStore.detectItem.enName" label="英文标准名称" :disabled="true" placeholder="" />
     </div>
-    <el-table :data="detectItemStore.detectItemList" style="width: 100%">
+    <el-table border :data="detectItemStore.detectItemList" style="width: 100%;">
       <!--  标准id  查找 -->
 
-      <el-table-column prop="id" label="序号" />
-      <el-table-column prop="detectItem" label="检测项" />
-      <el-table-column prop="requirement" label="结果要求" />
-      <el-table-column prop="detectMethodId" label="检测方法序号" />
-      <el-table-column prop="detectMethod" label="检测方法名称" />
-      <el-table-column prop="equipment" label="仪器设备" />
-      <el-table-column prop="equipmentRequirement" label="设备要求" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column type="index" label="序号" width="60" />
+      <el-table-column prop="detectItem" label="检测项" width="100" />
+      <el-table-column prop="requirement" label="结果要求" width="100" />
+      <el-table-column prop="detectMethodId" label="检测方法序号" width="120" />
+      <el-table-column prop="detectMethod" label="检测方法名称" width="120" />
+      <el-table-column prop="equipment" label="仪器设备" width="100" />
+      <el-table-column prop="equipmentRequirement" label="设备要求" width="100" />
+      <el-table-column prop="description" label="方法描述" width="120" />
+      <el-table-column fixed="right" label="操作" width="80">
         <template #default="scope">
           <el-button link type="primary" size="small" @click="handleClick(scope.row)">
             edit
@@ -83,6 +84,6 @@ const search = function () {
   </div>
 </template>
 
-<style scoped>
+<style>
 
 </style>

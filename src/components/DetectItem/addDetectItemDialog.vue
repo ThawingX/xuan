@@ -65,6 +65,9 @@ const addBtn = async function () {
       <el-form-item label="设备要求">
         <el-input v-model="detectItemStore.detectItem.equipmentRequirement " />
       </el-form-item>
+      <el-form-item label="方法描述">
+        <el-input v-model="detectItemStore.detectItem.description " />
+      </el-form-item>
     </el-form>
     <!-- 确定按钮 -->
     <div class="bottom">
