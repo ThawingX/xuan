@@ -13,15 +13,15 @@ export default function registerGuid(router: Router) {
     else {
       if (to.fullPath === '/login')
         return next('/menus')
-
-      if (!userStore.userInfo.length) {
-        const res = await userStore.getUserInfo()
-        // 如果查询不到当前用户信息，说明系统出错，直接返回到登录页面，之后做逻辑修改
-        if (res.data.code !== 1) {
-          window.localStorage.removeItem('account')
-          return next('/login')
-        }
+      // 暂时每一次切换路由都进行登录信息查询
+      // if (!Object.keys(userStore.userInfo).length) {
+      const res = await userStore.getUserInfo()
+      // 如果查询不到当前用户信息，说明系统出错，直接返回到登录页面，之后做逻辑修改
+      if (res.data.code !== 1) {
+        window.localStorage.removeItem('account')
+        return next('/login')
       }
+      // }
     }
 
     return next()

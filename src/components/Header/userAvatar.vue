@@ -3,7 +3,9 @@ import { ElNotification } from 'element-plus'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '~/stores/user'
+import { useMainStore } from '~/stores'
 const userStore = useUserStore()
+const mainStore = useMainStore()
 const router = useRouter()
 
 const dropDownMenu = ref()
@@ -25,20 +27,6 @@ const logOut = function () {
     type: 'success',
   })
   router.go('/login')
-}
-const getChRole = function (enName: String) {
-  switch (enName) {
-    case 'admin':
-      return '管理员'
-    case 'researcher':
-      return '科研人员'
-    case 'equipmentManager':
-      return '设备管理人员'
-    case 'staff':
-      return '内部人员'
-    default:
-      return '无'
-  }
 }
 </script>
 
@@ -71,7 +59,7 @@ const getChRole = function (enName: String) {
       </el-dropdown>
     </div>
     <div class="bottomContainer account" ml-2 text-xs>
-      {{ getChRole(userStore.userInfo.role) }}
+      {{ mainStore.getChRole(userStore.userInfo.role) }}
     </div>
   </div>
 </template>

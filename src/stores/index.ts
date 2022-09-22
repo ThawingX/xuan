@@ -5,7 +5,7 @@ export const useMainStore = defineStore('main', {
       topMenuList: [
         {
           mName: '标准',
-          route: { path: '/menus/standardList' },
+          route: { path: '/menus/standardlist' },
         },
         // {
         //   mName: '产品检测',
@@ -17,20 +17,37 @@ export const useMainStore = defineStore('main', {
         // },
         {
           mName: '标准录入',
-          route: { path: '/menus/standardEntry' },
+          route: { path: '/menus/standardentry' },
         },
         {
           mName: '检测项录入',
-          route: { path: '/menus/testInformationEntry' },
+          route: { path: '/menus/testinformationentry' },
         },
         {
           mName: '用户管理',
-          route: { path: '/menus/userManage' },
+          route: { path: '/menus/usermanage' },
+        },
+        {
+          mName: '用户申请管理',
+          route: { path: '/menus/userapplymanage' },
         },
       ],
     }
   },
   actions: {
-
+    getChRole(enName: String) {
+      switch (enName) {
+        case 'admin':
+          return '管理员'
+        case 'researcher':
+          return '科研人员'
+        case 'equipmentManager':
+          return '设备管理人员'
+        case 'staff':
+          return '内部人员'
+        default:
+          return '无'
+      }
+    },
   },
 })

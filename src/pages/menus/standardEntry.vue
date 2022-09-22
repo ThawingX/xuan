@@ -117,8 +117,8 @@ const standardRules = reactive<FormRules>({
             <el-radio-button label="行业标准" size="large" />
             <el-radio-button label="地方标准" size="large" />
             <el-radio-button label="团体标准" size="large" />
-            <el-radio-button label="企业标准" size="large" />
             <el-radio-button label="国际标准" size="large" />
+            <el-radio-button label="企业标准" size="large" />
           </el-radio-group>
         </div>
         <div class="inlineContainer" m6 flex justify-center items-start>
