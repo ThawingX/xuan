@@ -2,6 +2,7 @@ const { appliedAccountsModel } = require('../../schema/appliedAccounts')
 const { userModel } = require('../../schema/users')
 const { userBckModel } = require('../../schema/userBcks')
 const stringRandom = require('string-random')
+const sendMail = require('../../utils/mailer/index')
 module.exports = async function (req, res, next) {
     // 鉴权,管理员 ,通过身份证判断
     // reject 拒绝  allow 通过
@@ -53,6 +54,8 @@ module.exports = async function (req, res, next) {
                         }
                     }
                     const result = await userModel.create(form)
+                    // 发送邮件
+                    const sendMailRes = await sendMail({ email: form.email, account: form.account, password: form.password })
                     const delRes = await appliedAccountsModel.deleteOne({ IDNumber })
                     return res.json({
                         code: 1,
