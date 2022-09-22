@@ -38,6 +38,12 @@ const getTypeClass = function (type: string) {
   }
   return classes
 }
+const getStateName = function (enName: string) {
+  for (const item of standardStore.stateLists) {
+    if (item.requestKey === enName)
+      return item.mName
+  }
+}
 </script>
 
 <template>
@@ -70,9 +76,9 @@ const getTypeClass = function (type: string) {
           </div>
           <div class="department" mt-2 text-sm flex flex-col>
             <div class="item" flex>
-              <span>英文标题&nbsp</span>
+              <span>标准状态&nbsp</span>
               <div inline-block color-gray>
-                {{ row.enName }}
+                {{ getStateName(row.state) }}
               </div>
             </div>
             <div class="item" flex>
