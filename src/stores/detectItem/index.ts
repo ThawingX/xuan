@@ -17,6 +17,8 @@ export const useDetectItemStore = defineStore('detectItem', {
       },
       detectItemList: [],
       isShowAddDetectItem: false,
+      isShowSerchDialog: false,
+      standardList: [],
     }
   },
   getters: {

@@ -9,11 +9,14 @@ export const $submit = async (data = {}) => {
   })
 }
 
-export const $getStandard = async () => {
+export const $getStandard = async (limitNum = 50) => {
   return axios({
     method: 'get',
     url: 'http://119.3.243.150:3399/standard/list',
     headers: {},
+    params: {
+      limitNum,
+    },
   })
 }
 

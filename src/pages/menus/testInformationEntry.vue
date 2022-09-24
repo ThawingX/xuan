@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import axios from 'axios'
+import { ElNotification } from 'element-plus'
 import { useDetectItemStore } from '~/stores/detectItem'
+import { $getStandard } from '~/composables/http'
 const detectItemStore = useDetectItemStore()
 const handleClick = function () {
 }
@@ -40,8 +42,25 @@ const getDetectItem = async function (e: Event) {
   })
 }
 
-const search = function () {
-  alert('存在问题，暂时无法使用')
+const openSearchDialog = async function () {
+  detectItemStore.isShowSerchDialog = true
+  const { data } = await $getStandard(10)
+  const { code, message, result } = data
+  if (code === 1) {
+    detectItemStore.standardList = result
+    ElNotification({
+      title: '成功',
+      message,
+      type: 'success',
+    })
+  }
+  else {
+    ElNotification({
+      title: '失败',
+      message,
+      type: 'error',
+    })
+  }
 }
 </script>
 
@@ -51,7 +70,7 @@ const search = function () {
       <el-button type="primary" @click="addDetectItem">
         添加
       </el-button>
-      <el-button type="primary" @click="search">
+      <el-button type="primary" @click="openSearchDialog">
         查找
       </el-button>
       <el-input v-model="detectItemStore.detectItem.standardId" label="标准号" :clearable="true" placeholder="请输入标准号" @keyup.enter="getDetectItem($event)" />
@@ -81,6 +100,7 @@ const search = function () {
       </el-table-column>
     </el-table>
     <addDetectItemDialog />
+    <searchDetectItemDialog />
   </div>
 </template>
 
