@@ -10,7 +10,7 @@ declare module '@vue/runtime-core' {
     AddDetectItemDialog: typeof import('./src/components/DetectItem/addDetectItemDialog.vue')['default']
     AddOptionDialog: typeof import('./src/components/StandsList/addOptionDialog.vue')['default']
     AddRelationalStandard: typeof import('./src/components/StandsList/addRelationalStandard.vue')['default']
-    copy: typeof import('./src/components/DetectItem/addDetectItemDialog copy.vue')['default']
+    copy: typeof import('./src/components/StandsList/addOptionDialog copy.vue')['default']
     DetailStandard: typeof import('./src/components/detailStandard.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
@@ -22,13 +22,13 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/StandsList/search.vue')['default']
-    SearchDetectItem: typeof import('./src/components/DetectItem/searchDetectItem.vue')['default']
     SearchDetectItemDialog: typeof import('./src/components/DetectItem/searchDetectItemDialog.vue')['default']
     StandardAside: typeof import('./src/components/StandsList/standardAside.vue')['default']
     StandardHeader: typeof import('./src/components/StandsList/standardHeader.vue')['default']
     StandardList: typeof import('./src/components/StandsList/standardList.vue')['default']
     StandsList: typeof import('./src/components/StandsList.vue')['default']
     TopConnection: typeof import('./src/components/Header/topConnection.vue')['default']
+    UploadDialog: typeof import('./src/components/StandsList/uploadDialog.vue')['default']
     UserAvatar: typeof import('./src/components/Header/userAvatar.vue')['default']
   }
 }

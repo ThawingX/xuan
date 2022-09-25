@@ -4,8 +4,9 @@ import { $getStandard } from '~/composables/http'
 const standardStore = useStandardStore()
 const handleKey = async (row: any) => {
   standardStore.standardLists = []
-  const res = await $getStandard(row.requestKey)
-  standardStore.standardLists = res.data.data
+  const { data } = await $getStandard()
+  const { code, message, result } = data
+  standardStore.standardLists = result
 }
 const keyOptions = {
   standardType: {

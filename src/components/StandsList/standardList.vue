@@ -1,5 +1,7 @@
 <script setup lang='ts'>
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { $getStandard } from '~/composables/http'
 import { useStandardStore } from '~/stores/standard'
 import { usePaginationStore } from '~/stores/standard/Pagination'
 import { useStandardFormStore } from '~/stores/standard/standardForm'
@@ -12,6 +14,7 @@ function turnToDetail(row: any) {
   router.push({ name: 'detail', params: { ...row } })
 }
 const getTrimTime = function (time: string) {
+  console.log(time)
   return time.slice(0, 10)
 }
 const getTypeClass = function (type: string) {
@@ -44,6 +47,12 @@ const getStateName = function (enName: string) {
       return item.mName
   }
 }
+onMounted(async () => {
+  standardStore.standardLists = []
+  const { data } = await $getStandard()
+  const { code, message, result } = data
+  standardStore.standardLists = result
+})
 </script>
 
 <template>
