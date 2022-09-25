@@ -27,7 +27,7 @@ onMounted(async () => {
   if (code === 1)
     relationalStandardStore.subStandardList = result
 })
-async function turnToDetail(row: any) {
+const turnToDetail = async function (row: any) {
   relationalStandardStore.subStandardList = []
   info.value = row
   const { data } = await $getRelation()
@@ -35,6 +35,9 @@ async function turnToDetail(row: any) {
   if (code === 1)
     relationalStandardStore.subStandardList = result
   standardFormStore.StandardForm.standardType = row.standardType
+}
+const openUploadDialog = function () {
+  
 }
 </script>
 
@@ -107,7 +110,9 @@ async function turnToDetail(row: any) {
     <div class="btnGroup">
       <el-button>修改</el-button>
       <el-button>删除</el-button>
-      <el-button>上传标准</el-button>
+      <el-button @click="openUploadDialog()">
+        上传标准
+      </el-button>
       <el-button @click="openRelationalStandard()">
         添加关联标准
       </el-button>
